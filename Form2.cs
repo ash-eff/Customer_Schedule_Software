@@ -31,9 +31,14 @@ namespace software_2_c969
             dgv.RowHeadersVisible = false;
         }
 
-        private void UpdateCustomerGrid()
+        public void UpdateCustomerGrid()
         {
             dgvCustomers.DataSource = CustomerRecords.GetAllCustomers;
+        }
+
+        public void RefreshData()
+        {
+            dgvCustomers.Refresh();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -68,7 +73,7 @@ namespace software_2_c969
             {
                 int customerIndex = dgvCustomers.CurrentCell.RowIndex;
                 Customer customer = CustomerRecords.GetCustomer(customerIndex);
-                var nextForm = new Form4();
+                var nextForm = new Form4(this);
                 nextForm.SetCustomer = customer;
                 nextForm.ShowDialog(this);
             }

@@ -32,7 +32,7 @@ namespace software_2_c969
             {
                 connection.Open();
 
-                string query = "select cu.customerId, cu.customerName, ad.address, ad.address2, ad.postalCode, ad.phone, ci.city, co.country " +
+                string query = "select cu.customerId, cu.customerName, cu.addressId, ad.address, ad.address2, ad.postalCode, ad.phone, ad.cityId, ci.city, ci.countryId, co.country " +
                                 "from customer cu " +
                                 "join address ad on cu.addressId = ad.addressId " +
                                 "join city ci on ad.cityId = ci.cityId " +
@@ -48,13 +48,16 @@ namespace software_2_c969
                             if (!exists)
                             {
                                 string customerName = reader.GetString(1);
-                                string address = reader.GetString(2);
-                                string address2 = reader.GetString(3);
-                                string postalCode = reader.GetString(4);
-                                string phone = reader.GetString(5);
-                                string city = reader.GetString(6);
-                                string country = reader.GetString(7);
-                                Customer customer = new Customer(customerId, customerName, address, address2, postalCode, phone, city, country);
+                                int addressID = reader.GetInt32(2);
+                                string address = reader.GetString(3);
+                                string address2 = reader.GetString(4);
+                                string postalCode = reader.GetString(5);
+                                string phone = reader.GetString(6);
+                                int cityID = reader.GetInt32(7);
+                                string city = reader.GetString(8);
+                                int countryID = reader.GetInt32(9);
+                                string country = reader.GetString(10);
+                                Customer customer = new Customer(customerId, customerName, addressID, address, address2, postalCode, phone, cityID, city, countryID, country);
                                 AddCustomerToList(customer);
                             }
                         }
@@ -71,21 +74,20 @@ namespace software_2_c969
                 MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
 
-                string customerQuery = "UPDATE customer SET customerName = @newCustomerName, WHERE customerID = @customerID";
+                string customerQuery = "UPDATE customer SET customerName = @newCustomerName WHERE customerID = @customerID";
                 command.CommandText = customerQuery;
                 command.Parameters.AddWithValue("@newCustomerName", customer.Name);
                 command.Parameters.AddWithValue("@customerID", customer.CustomerID);
                 command.ExecuteNonQuery();
 
-                string addressQuery = "UPDATE address SET address = @newAddress, address2 = @newAddress2, postalCode = @newPostalCode, phone = @newPhone WHERE address = @address";
+                string addressQuery = "UPDATE address SET address = @newAddress, address2 = @newAddress2, postalCode = @newPostalCode, phone = @newPhone WHERE addressID = @addressID";
                 command.CommandText = addressQuery;
                 command.Parameters.AddWithValue("@newAddress", customer.AddressOne);
                 command.Parameters.AddWithValue("@newAddress2", customer.AddressTwo);
                 command.Parameters.AddWithValue("@newPostalCode", customer.PostalCode);
                 command.Parameters.AddWithValue("@newPhone", customer.PhoneNumber);
-                command.Parameters.AddWithValue("@customerID", customer.AddressOne);
+                command.Parameters.AddWithValue("@addressID", customer.AddressID);
                 command.ExecuteNonQuery();
-
             }
         }
 

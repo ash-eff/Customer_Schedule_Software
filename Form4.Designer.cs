@@ -344,6 +344,7 @@ namespace software_2_c969
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form4";
             this.Text = "Add Customer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form4_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
