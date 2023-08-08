@@ -25,7 +25,11 @@ namespace software_2_c969
 			this.StartPosition = FormStartPosition.CenterScreen;
 			InitializeDatabaseConnection();
 			SetLanguageForUser(GetLanguageCode());
-			
+			// for testing only
+			textBox1.Text = "test";
+			textBox2.Text = "test";
+
+
 		}
 
 		private string GetLanguageCode()
@@ -134,5 +138,10 @@ namespace software_2_c969
         {
 			MatchUserNameAndPassword();
 		}
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+			Application.Exit();
+        }
     }
 }
