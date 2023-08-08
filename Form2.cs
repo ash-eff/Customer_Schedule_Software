@@ -54,5 +54,24 @@ namespace software_2_c969
                 }
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var nextForm = new Form3();
+            nextForm.Show();
+            //this.Hide();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if(dgvCustomers.Rows.Count > 0)
+            {
+                int customerIndex = dgvCustomers.CurrentCell.RowIndex;
+                Customer customer = CustomerRecords.GetCustomer(customerIndex);
+                var nextForm = new Form4();
+                nextForm.SetCustomer = customer;
+                nextForm.ShowDialog(this);
+            }
+        }
     }
 }
