@@ -16,10 +16,13 @@ namespace software_2_c969
 	public partial class Form1 : Form
 	{
 		private MySqlConnection connection;
+		private string errorMessage;
+		private string errorTitle;
 
 		public Form1()
 		{
 			InitializeComponent();
+			this.StartPosition = FormStartPosition.CenterScreen;
 			InitializeDatabaseConnection();
 			SetLanguageForUser(GetLanguageCode());
 			
@@ -40,6 +43,8 @@ namespace software_2_c969
 					lblUserName.Text = "User Name";
 					lblPassword.Text = "Password";
 					btnLogin.Text = "Login";
+					errorMessage = "Error: User name and password do not match.";
+					errorTitle = "Unknown User";
 					this.Text = "Login";
 					break;
 				case "gd": //Scottish Gaelic
@@ -47,11 +52,15 @@ namespace software_2_c969
 					lblPassword.Text = "Facal-faire";
 					btnLogin.Text = "Logadh a-steach";
 					this.Text = "Logadh a-steach";
+					errorMessage = "Mearachd: Chan eil an t-ainm-cleachdaidh agus am facal-faire co-ionnan.";
+					errorTitle = "Cleachdaiche neo-aithnichte";
 					break;
 				default:
 					lblUserName.Text = "User Name";
 					lblPassword.Text = "Password";
 					btnLogin.Text = "Login";
+					errorMessage = "Error: User name and password do not match.";
+					errorTitle = "Unknown User";
 					this.Text = "Login";
 					break;
 			}
@@ -63,9 +72,8 @@ namespace software_2_c969
 			connection = new MySqlConnection(connectingString);
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+		private void MatchUserNameAndPassword()
         {
-			// might want to make sure that something is in username and password fields
 			string query = "SELECT * FROM user";
 			MySqlCommand command = new MySqlCommand(query, connection);
 
@@ -74,13 +82,28 @@ namespace software_2_c969
 				connection.Open();
 
 				using (MySqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-						// do stuff to check user name and password here
-						Console.WriteLine(reader["userName"].ToString());
-                    }
-                }
+				{
+					bool userFound = false;
+					while (reader.Read())
+					{
+						string userName = reader.GetString("userName");
+						string password = reader.GetString("password");
+						if (userName == textBox1.Text && password == textBox2.Text)
+						{
+							userFound = true;
+						}
+					}
+					if (!userFound)
+					{
+						MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					}
+					else
+					{
+						var nextForm = new Form2();
+						nextForm.Show();
+						this.Hide();
+					}
+				}
 			}
 			catch (MySqlException ex)
 			{
@@ -93,6 +116,23 @@ namespace software_2_c969
 					connection.Close();
 				}
 			}
+		}
+
+		private void onTextChanged(object sender, EventArgs e)
+        {
+			if(textBox1.Text != "" & textBox2.Text != "")
+            {
+				btnLogin.Enabled = true;
+            }
+            else
+            {
+				btnLogin.Enabled = false;
+			}
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+			MatchUserNameAndPassword();
 		}
     }
 }

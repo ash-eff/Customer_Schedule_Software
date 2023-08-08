@@ -92,6 +92,7 @@ namespace software_2_c969
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(200, 29);
             this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.onTextChanged);
             // 
             // textBox2
             // 
@@ -102,10 +103,12 @@ namespace software_2_c969
             this.textBox2.Size = new System.Drawing.Size(200, 29);
             this.textBox2.TabIndex = 6;
             this.textBox2.UseSystemPasswordChar = true;
+            this.textBox2.TextChanged += new System.EventHandler(this.onTextChanged);
             // 
             // btnLogin
             // 
             this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnLogin.Enabled = false;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Location = new System.Drawing.Point(205, 261);
             this.btnLogin.Name = "btnLogin";
