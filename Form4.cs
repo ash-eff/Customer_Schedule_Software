@@ -25,12 +25,12 @@ namespace software_2_c969
         {
             txtId.Text = customer.CustomerID.ToString();
             txtName.Text = customer.Name;
-            txtAddress.Text = customer.AddressOne;
-            txtAddressTwo.Text = customer.AddressTwo;
-            txtZip.Text = customer.PostalCode;
-            txtPhone.Text = customer.PhoneNumber;
-            txtCity.Text = customer.City;
-            txtCountry.Text = customer.Country;
+            txtAddress.Text = customer.Address.Address1;
+            txtAddressTwo.Text = customer.Address.Address2;
+            txtZip.Text = customer.Address.PostalCode;
+            txtPhone.Text = customer.Address.Phone;
+            txtCity.Text = customer.Address.City.Name;
+            txtCountry.Text = customer.Address.City.Country.Name;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -49,12 +49,12 @@ namespace software_2_c969
         {
             customer.CustomerID = int.Parse(txtId.Text);
             customer.Name = txtName.Text;
-            customer.AddressOne = txtAddress.Text;
-            customer.AddressTwo = txtAddressTwo.Text;
-            customer.PostalCode = txtZip.Text;
-            customer.PhoneNumber = txtPhone.Text;
-            customer.City = txtCity.Text;
-            customer.Country = txtCountry.Text;
+            customer.Address.Address1 = txtAddress.Text;
+            customer.Address.Address2 = txtAddressTwo.Text;
+            customer.Address.PostalCode = txtZip.Text;
+            customer.Address.Phone = txtPhone.Text;
+            customer.Address.City.Name = txtCity.Text;
+            customer.Address.City.Country.Name = txtCountry.Text;
         }
 
         private void Form4_FormClosing(object sender, FormClosingEventArgs e)

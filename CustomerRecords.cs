@@ -32,11 +32,11 @@ namespace software_2_c969
             {
                 connection.Open();
 
-                string query = "select cu.customerId, cu.customerName, cu.addressId, ad.address, ad.address2, ad.postalCode, ad.phone, ad.cityId, ci.city, ci.countryId, co.country " +
-                                "from customer cu " +
-                                "join address ad on cu.addressId = ad.addressId " +
-                                "join city ci on ad.cityId = ci.cityId " +
-                                "join country co on ci.countryId = co.countryId;";
+                string query = "SELECT cu.customerId, cu.customerName, cu.addressId, ad.address, ad.address2, ad.postalCode, ad.phone, ad.cityId, ci.city, ci.countryId, co.country " +
+                                "FROM customer cu " +
+                                "JOIN address ad ON cu.addressId = ad.addressId " +
+                                "JOIN city ci ON ad.cityId = ci.cityId " +
+                                "JOIN country co ON ci.countryId = co.countryId;";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -49,15 +49,18 @@ namespace software_2_c969
                             {
                                 string customerName = reader.GetString(1);
                                 int addressID = reader.GetInt32(2);
-                                string address = reader.GetString(3);
+                                string address1 = reader.GetString(3);
                                 string address2 = reader.GetString(4);
                                 string postalCode = reader.GetString(5);
                                 string phone = reader.GetString(6);
                                 int cityID = reader.GetInt32(7);
-                                string city = reader.GetString(8);
+                                string cityName = reader.GetString(8);
                                 int countryID = reader.GetInt32(9);
-                                string country = reader.GetString(10);
-                                Customer customer = new Customer(customerId, customerName, addressID, address, address2, postalCode, phone, cityID, city, countryID, country);
+                                string countryName = reader.GetString(10);
+                                Country country = new Country(countryID, countryName);
+                                City city = new City(cityID, cityName, country);
+                                Address address = new Address(addressID, address1, address2, postalCode, phone, city);
+                                Customer customer = new Customer(customerId, customerName, address);
                                 AddCustomerToList(customer);
                             }
                         }
@@ -70,24 +73,24 @@ namespace software_2_c969
         {
             using (MySqlConnection connection = new MySqlConnection(connectingString))
             {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand();
-                command.Connection = connection;
-
-                string customerQuery = "UPDATE customer SET customerName = @newCustomerName WHERE customerID = @customerID";
-                command.CommandText = customerQuery;
-                command.Parameters.AddWithValue("@newCustomerName", customer.Name);
-                command.Parameters.AddWithValue("@customerID", customer.CustomerID);
-                command.ExecuteNonQuery();
-
-                string addressQuery = "UPDATE address SET address = @newAddress, address2 = @newAddress2, postalCode = @newPostalCode, phone = @newPhone WHERE addressID = @addressID";
-                command.CommandText = addressQuery;
-                command.Parameters.AddWithValue("@newAddress", customer.AddressOne);
-                command.Parameters.AddWithValue("@newAddress2", customer.AddressTwo);
-                command.Parameters.AddWithValue("@newPostalCode", customer.PostalCode);
-                command.Parameters.AddWithValue("@newPhone", customer.PhoneNumber);
-                command.Parameters.AddWithValue("@addressID", customer.AddressID);
-                command.ExecuteNonQuery();
+                //connection.Open();
+                //MySqlCommand command = new MySqlCommand();
+                //command.Connection = connection;
+                //
+                //string customerQuery = "UPDATE customer SET customerName = @newCustomerName WHERE customerID = @customerID";
+                //command.CommandText = customerQuery;
+                //command.Parameters.AddWithValue("@newCustomerName", customer.Name);
+                //command.Parameters.AddWithValue("@customerID", customer.CustomerID);
+                //command.ExecuteNonQuery();
+                //
+                //string addressQuery = "UPDATE address SET address = @newAddress, address2 = @newAddress2, postalCode = @newPostalCode, phone = @newPhone WHERE addressID = @addressID";
+                //command.CommandText = addressQuery;
+                //command.Parameters.AddWithValue("@newAddress", customer.AddressOne);
+                //command.Parameters.AddWithValue("@newAddress2", customer.AddressTwo);
+                //command.Parameters.AddWithValue("@newPostalCode", customer.PostalCode);
+                //command.Parameters.AddWithValue("@newPhone", customer.PhoneNumber);
+                //command.Parameters.AddWithValue("@addressID", customer.AddressID);
+                //command.ExecuteNonQuery();
             }
         }
 
@@ -117,7 +120,5 @@ namespace software_2_c969
                 command.ExecuteNonQuery();
             }
         }
-
-
     }
 }

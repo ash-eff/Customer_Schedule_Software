@@ -33,6 +33,7 @@ namespace software_2_c969
 
         public void UpdateCustomerGrid()
         {
+            dgvCustomers.AutoGenerateColumns = false;
             dgvCustomers.DataSource = CustomerRecords.GetAllCustomers;
         }
 
