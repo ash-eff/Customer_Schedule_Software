@@ -32,14 +32,13 @@ namespace software_2_c969
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtCountry = new System.Windows.Forms.TextBox();
+            this.txtCity = new System.Windows.Forms.TextBox();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
+            this.txtAddress2 = new System.Windows.Forms.TextBox();
+            this.txtAddress1 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,7 +46,6 @@ namespace software_2_c969
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -92,14 +90,13 @@ namespace software_2_c969
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Controls.Add(this.textBox8, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.textBox7, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.textBox6, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.textBox5, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.textBox4, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.textBox3, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txtCountry, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.txtCity, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.txtPhone, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.txtPostalCode, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtAddress2, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtAddress1, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtName, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label4, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
@@ -107,7 +104,6 @@ namespace software_2_c969
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.label8, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.label9, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 51);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -123,80 +119,68 @@ namespace software_2_c969
             this.tableLayoutPanel2.Size = new System.Drawing.Size(600, 408);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // textBox8
+            // txtCountry
             // 
-            this.textBox8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox8.Location = new System.Drawing.Point(189, 365);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(300, 35);
-            this.textBox8.TabIndex = 16;
+            this.txtCountry.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCountry.Location = new System.Drawing.Point(189, 365);
+            this.txtCountry.Name = "txtCountry";
+            this.txtCountry.Size = new System.Drawing.Size(300, 35);
+            this.txtCountry.TabIndex = 16;
             // 
-            // textBox7
+            // txtCity
             // 
-            this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox7.Location = new System.Drawing.Point(189, 314);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(300, 35);
-            this.textBox7.TabIndex = 15;
+            this.txtCity.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCity.Location = new System.Drawing.Point(189, 314);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.Size = new System.Drawing.Size(300, 35);
+            this.txtCity.TabIndex = 15;
             // 
-            // textBox6
+            // txtPhone
             // 
-            this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox6.Location = new System.Drawing.Point(189, 263);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(300, 35);
-            this.textBox6.TabIndex = 14;
+            this.txtPhone.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPhone.Location = new System.Drawing.Point(189, 263);
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(300, 35);
+            this.txtPhone.TabIndex = 14;
             // 
-            // textBox5
+            // txtPostalCode
             // 
-            this.textBox5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(189, 212);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(300, 35);
-            this.textBox5.TabIndex = 13;
+            this.txtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPostalCode.Location = new System.Drawing.Point(189, 212);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(300, 35);
+            this.txtPostalCode.TabIndex = 13;
             // 
-            // textBox4
+            // txtAddress2
             // 
-            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(189, 161);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(300, 35);
-            this.textBox4.TabIndex = 12;
+            this.txtAddress2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAddress2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress2.Location = new System.Drawing.Point(189, 161);
+            this.txtAddress2.Name = "txtAddress2";
+            this.txtAddress2.Size = new System.Drawing.Size(300, 35);
+            this.txtAddress2.TabIndex = 12;
             // 
-            // textBox3
+            // txtAddress1
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(189, 110);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(300, 35);
-            this.textBox3.TabIndex = 11;
+            this.txtAddress1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAddress1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress1.Location = new System.Drawing.Point(189, 110);
+            this.txtAddress1.Name = "txtAddress1";
+            this.txtAddress1.Size = new System.Drawing.Size(300, 35);
+            this.txtAddress1.TabIndex = 11;
             // 
-            // textBox2
+            // txtName
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(189, 59);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(300, 35);
-            this.textBox2.TabIndex = 10;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(147, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 29);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "ID";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.txtName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Location = new System.Drawing.Point(189, 59);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(300, 35);
+            this.txtName.TabIndex = 10;
             // 
             // label3
             // 
@@ -239,11 +223,11 @@ namespace software_2_c969
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(71, 215);
+            this.label6.Location = new System.Drawing.Point(38, 215);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(112, 29);
+            this.label6.Size = new System.Drawing.Size(145, 29);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Zip Code";
+            this.label6.Text = "Postal Code";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label7
@@ -282,15 +266,6 @@ namespace software_2_c969
             this.label9.Text = "Country";
             this.label9.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(189, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(300, 35);
-            this.textBox1.TabIndex = 9;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
@@ -318,6 +293,7 @@ namespace software_2_c969
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -356,7 +332,6 @@ namespace software_2_c969
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -365,14 +340,13 @@ namespace software_2_c969
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCountry;
+        private System.Windows.Forms.TextBox txtCity;
+        private System.Windows.Forms.TextBox txtPhone;
+        private System.Windows.Forms.TextBox txtPostalCode;
+        private System.Windows.Forms.TextBox txtAddress2;
+        private System.Windows.Forms.TextBox txtAddress1;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
     }

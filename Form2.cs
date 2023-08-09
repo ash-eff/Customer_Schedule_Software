@@ -14,64 +14,53 @@ namespace software_2_c969
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        private string workingUser = null;
+        public string GetWorkingUser { get { return workingUser; } }
+
+        public Form2(int userID)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
+            SetWorkingUser(userID);
             BuildDataGridView(dgvCustomers);
             CustomerRecords.LoadCustomersFromData();
             UpdateCustomerGrid();
+        }
+
+        private void SetWorkingUser(int userId)
+        {
+            string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            using (MySqlConnection connection = new MySqlConnection(connectingString))
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = connection;
+
+                string countryQuery = "SELECT userName FROM user WHERE userId = @userId";
+                command.CommandText = countryQuery;
+                command.Parameters.AddWithValue("@userId", userId);
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        workingUser = reader.GetString("userName");
+                        Console.WriteLine("Welcome, " + workingUser);
+                    }
+                }
+            }
         }
 
         private void BuildDataGridView(DataGridView dgv)
         {
             dgv.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            //dgv.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+            dgv.AutoGenerateColumns = false;
             dgv.RowHeadersVisible = false;
-            dgv.Columns.Add("CustomerIDColumn", "Customer ID");
-            dgv.Columns["CustomerIDColumn"].DataPropertyName = "CustomerID";
-
-            dgv.Columns.Add("NameColumn", "Name");
-            dgv.Columns["NameColumn"].DataPropertyName = "Name";
-
-            dgv.Columns.Add("Address1Column", "Address 1");
-            dgv.Columns["Address1Column"].DataPropertyName = "Address.Address1";
-
-            dgv.Columns.Add("Address2Column", "Address 2");
-            dgv.Columns["Address1Column"].DataPropertyName = "Address.Address2";
-
-            dgv.Columns.Add("PostalCodeColumn", "Postal Code");
-            dgv.Columns["PostalCodeColumn"].DataPropertyName = "Address.PostalCode";
-
-            dgv.Columns.Add("PhoneColumn", "Phone");
-            dgv.Columns["PhoneColumn"].DataPropertyName = "Address.Phone";
-
-            dgv.Columns.Add("CityColumn", "City");
-            dgv.Columns["CityColumn"].DataPropertyName = "Address.City.Name";
-
-            dgv.Columns.Add("CountryColumn", "Country");
-            dgv.Columns["CountryColumn"].DataPropertyName = "Address.City.Country.Name";
-
         }
 
         public void UpdateCustomerGrid()
         {
-            dgvCustomers.AutoGenerateColumns = false;
             BindingList<Customer> customers = CustomerRecords.GetAllCustomers;
-
-            foreach (Customer c in customers)
-            {
-                Console.WriteLine(c.CustomerID);
-                Console.WriteLine(c.Name);
-                Console.WriteLine(c.Address.Address1);
-                Console.WriteLine(c.Address.Address2);
-                Console.WriteLine(c.Address.PostalCode);
-                Console.WriteLine(c.Address.Phone);
-                Console.WriteLine(c.Address.City.Name);
-                Console.WriteLine(c.Address.City.Country.Name);
-                Console.WriteLine("------------------------------");
-            }
             dgvCustomers.DataSource = customers;
             RefreshData();
         }
@@ -102,7 +91,7 @@ namespace software_2_c969
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var nextForm = new Form3();
+            var nextForm = new Form3(this);
             nextForm.Show();
             //this.Hide();
         }

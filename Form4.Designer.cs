@@ -35,9 +35,9 @@ namespace software_2_c969
             this.txtCountry = new System.Windows.Forms.TextBox();
             this.txtCity = new System.Windows.Forms.TextBox();
             this.txtPhone = new System.Windows.Forms.TextBox();
-            this.txtZip = new System.Windows.Forms.TextBox();
-            this.txtAddressTwo = new System.Windows.Forms.TextBox();
-            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
+            this.txtAddress2 = new System.Windows.Forms.TextBox();
+            this.txtAddress1 = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
@@ -95,9 +95,9 @@ namespace software_2_c969
             this.tableLayoutPanel2.Controls.Add(this.txtCountry, 1, 7);
             this.tableLayoutPanel2.Controls.Add(this.txtCity, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.txtPhone, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.txtZip, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.txtAddressTwo, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.txtAddress, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.txtPostalCode, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.txtAddress2, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.txtAddress1, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.txtName, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblId, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblName, 0, 1);
@@ -150,32 +150,32 @@ namespace software_2_c969
             this.txtPhone.Size = new System.Drawing.Size(300, 35);
             this.txtPhone.TabIndex = 14;
             // 
-            // txtZip
+            // txtPostalCode
             // 
-            this.txtZip.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtZip.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtZip.Location = new System.Drawing.Point(189, 212);
-            this.txtZip.Name = "txtZip";
-            this.txtZip.Size = new System.Drawing.Size(300, 35);
-            this.txtZip.TabIndex = 13;
+            this.txtPostalCode.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtPostalCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPostalCode.Location = new System.Drawing.Point(189, 212);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(300, 35);
+            this.txtPostalCode.TabIndex = 13;
             // 
-            // txtAddressTwo
+            // txtAddress2
             // 
-            this.txtAddressTwo.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAddressTwo.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddressTwo.Location = new System.Drawing.Point(189, 161);
-            this.txtAddressTwo.Name = "txtAddressTwo";
-            this.txtAddressTwo.Size = new System.Drawing.Size(300, 35);
-            this.txtAddressTwo.TabIndex = 12;
+            this.txtAddress2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAddress2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress2.Location = new System.Drawing.Point(189, 161);
+            this.txtAddress2.Name = "txtAddress2";
+            this.txtAddress2.Size = new System.Drawing.Size(300, 35);
+            this.txtAddress2.TabIndex = 12;
             // 
-            // txtAddress
+            // txtAddress1
             // 
-            this.txtAddress.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(189, 110);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(300, 35);
-            this.txtAddress.TabIndex = 11;
+            this.txtAddress1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAddress1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAddress1.Location = new System.Drawing.Point(189, 110);
+            this.txtAddress1.Name = "txtAddress1";
+            this.txtAddress1.Size = new System.Drawing.Size(300, 35);
+            this.txtAddress1.TabIndex = 11;
             // 
             // txtName
             // 
@@ -239,11 +239,11 @@ namespace software_2_c969
             this.lblZip.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lblZip.AutoSize = true;
             this.lblZip.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblZip.Location = new System.Drawing.Point(71, 215);
+            this.lblZip.Location = new System.Drawing.Point(38, 215);
             this.lblZip.Name = "lblZip";
-            this.lblZip.Size = new System.Drawing.Size(112, 29);
+            this.lblZip.Size = new System.Drawing.Size(145, 29);
             this.lblZip.TabIndex = 5;
-            this.lblZip.Text = "Zip Code";
+            this.lblZip.Text = "Postal Code";
             this.lblZip.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblPhone
@@ -371,9 +371,9 @@ namespace software_2_c969
         private System.Windows.Forms.TextBox txtCountry;
         private System.Windows.Forms.TextBox txtCity;
         private System.Windows.Forms.TextBox txtPhone;
-        private System.Windows.Forms.TextBox txtZip;
-        private System.Windows.Forms.TextBox txtAddressTwo;
-        private System.Windows.Forms.TextBox txtAddress;
+        private System.Windows.Forms.TextBox txtPostalCode;
+        private System.Windows.Forms.TextBox txtAddress2;
+        private System.Windows.Forms.TextBox txtAddress1;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnSave;

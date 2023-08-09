@@ -69,29 +69,156 @@ namespace software_2_c969
             }
         }
 
-        public static void UpdateCustomerData(Customer customer)
+        public static void UpdateCustomerData(Customer customer, string user)
         {
             using (MySqlConnection connection = new MySqlConnection(connectingString))
             {
-                //connection.Open();
-                //MySqlCommand command = new MySqlCommand();
-                //command.Connection = connection;
-                //
-                //string customerQuery = "UPDATE customer SET customerName = @newCustomerName WHERE customerID = @customerID";
-                //command.CommandText = customerQuery;
-                //command.Parameters.AddWithValue("@newCustomerName", customer.Name);
-                //command.Parameters.AddWithValue("@customerID", customer.CustomerID);
-                //command.ExecuteNonQuery();
-                //
-                //string addressQuery = "UPDATE address SET address = @newAddress, address2 = @newAddress2, postalCode = @newPostalCode, phone = @newPhone WHERE addressID = @addressID";
-                //command.CommandText = addressQuery;
-                //command.Parameters.AddWithValue("@newAddress", customer.AddressOne);
-                //command.Parameters.AddWithValue("@newAddress2", customer.AddressTwo);
-                //command.Parameters.AddWithValue("@newPostalCode", customer.PostalCode);
-                //command.Parameters.AddWithValue("@newPhone", customer.PhoneNumber);
-                //command.Parameters.AddWithValue("@addressID", customer.AddressID);
-                //command.ExecuteNonQuery();
+                connection.Open();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = connection;
+
+                HandleCustomerCountry(command, customer, user);
+                HandleCustomerCity(command, customer, user);
+                UpdateCustomerAddress(command, customer, user);
+                UpdateCustomerInfo(command, customer, user);
             }
+        }
+
+        public static void AddCustomerData(Customer customer, string user)
+        {
+            using (MySqlConnection connection = new MySqlConnection(connectingString))
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand();
+                command.Connection = connection;
+
+                HandleCustomerCountry(command, customer, user);
+                HandleCustomerCity(command, customer, user);
+                AddCustomerAddress(command, customer, user);
+                AddCustomerInfo(command, customer, user);
+            }
+        }
+
+        private static void HandleCustomerCountry(MySqlCommand command, Customer customer, string user)
+        {
+            string countryQuery = "INSERT INTO country (country, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+                "SELECT @country, NOW(), @user , NOW(), @user " +
+                "WHERE NOT EXISTS(SELECT 1 FROM country WHERE country = @country)";
+            command.CommandText = countryQuery;
+            command.Parameters.AddWithValue("@country", customer.Address.City.Country.Name);
+            command.Parameters.AddWithValue("@user", user);
+            command.ExecuteNonQuery();
+
+            // change countryID for customer
+            string countryIdQuery = "SELECT countryId FROM country WHERE country = @country";
+            command.CommandText = countryIdQuery;
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    customer.Address.City.Country.CountryID = reader.GetInt32(0);
+                }
+            }
+        }
+
+        private static void HandleCustomerCity(MySqlCommand command, Customer customer, string user)
+        {
+
+            string cityQuery = "INSERT INTO city (city, countryId, createDate, createdBy, lastUpdate, lastUpdateBy) " +
+                "SELECT @city, @countryId, NOW(), @user, NOW(), @user " +
+                "WHERE NOT EXISTS(SELECT 1 FROM city WHERE city = @city)";
+            command.CommandText = cityQuery;
+            command.Parameters.AddWithValue("@city", customer.Address.City.Name);
+            command.Parameters.AddWithValue("@countryId", customer.Address.City.Country.CountryID);
+            //command.Parameters.AddWithValue("@user", user);
+            command.ExecuteNonQuery();
+
+            // change cityId for customer
+            string cityIdQuery = "SELECT cityId FROM city WHERE city = @city";
+            command.CommandText = cityIdQuery;
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    customer.Address.City.CityId = reader.GetInt32(0);
+                }
+            }
+        }
+
+        private static void UpdateCustomerAddress(MySqlCommand command, Customer customer, string user)
+        { 
+            string addressQuery = "UPDATE address " +
+                "SET address = @address1, address2 = @address2, cityId = @cityId, postalCode = @postalCode, phone = @phone, lastUpdate = NOW(), lastUpdateBy = @user " +
+                "WHERE addressId = @addressId";
+            command.CommandText = addressQuery;
+            command.Parameters.AddWithValue("@address1", customer.Address.Address1);
+            command.Parameters.AddWithValue("@address2", customer.Address.Address2);
+            command.Parameters.AddWithValue("@cityId", customer.Address.City.CityId);
+            command.Parameters.AddWithValue("@postalCode", customer.Address.PostalCode);
+            command.Parameters.AddWithValue("@phone", customer.Address.Phone);
+            command.Parameters.AddWithValue("@addressId", customer.Address.AddressId);
+            //command.Parameters.AddWithValue("@user", user);
+            command.ExecuteNonQuery();
+        }
+
+        private static void AddCustomerAddress(MySqlCommand command, Customer customer, string user)
+        {
+            string addressQuery = "INSERT INTO address (address, address2, cityId, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                "VALUES (@address1, @address2, @cityId, @postalCode, @phone, NOW(), @user, NOW(), @user)";
+            command.CommandText = addressQuery;
+            command.Parameters.AddWithValue("@address1", customer.Address.Address1);
+            command.Parameters.AddWithValue("@address2", customer.Address.Address2);
+            command.Parameters.AddWithValue("@cityId", customer.Address.City.CityId);
+            command.Parameters.AddWithValue("@postalCode", customer.Address.PostalCode);
+            command.Parameters.AddWithValue("@phone", customer.Address.Phone);
+            command.Parameters.AddWithValue("@addressId", customer.Address.AddressId);
+            command.ExecuteNonQuery();
+
+            // add addressID for customer address
+            string addressIdQuery = "SELECT LAST_INSERT_ID() AS addressId";
+            command.CommandText = addressIdQuery;
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    customer.Address.AddressId = reader.GetInt32(0);
+                }
+            }
+        }
+
+
+        private static void UpdateCustomerInfo(MySqlCommand command, Customer customer, string user)
+        {
+            string customerQuery = "UPDATE customer " +
+                "SET customerName = @newCustomerName, addressId = @addressId, lastUpdate = NOW(), lastUpdateBy = @user " +
+                "WHERE customerID = @customerID";
+            command.CommandText = customerQuery;
+            command.Parameters.AddWithValue("@newCustomerName", customer.Name);
+            command.Parameters.AddWithValue("@customerID", customer.CustomerID);
+            command.ExecuteNonQuery();
+        }
+
+        private static void AddCustomerInfo(MySqlCommand command, Customer customer, string user)
+        {
+            string customerQuery = "INSERT INTO customer (customerName, addressId, active, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                "VALUES (@customerName, @newAddressId, 1, NOW(), @user, NOW(), @user)";
+            command.CommandText = customerQuery;
+            command.Parameters.AddWithValue("@customerName", customer.Name);
+            command.Parameters.AddWithValue("@newAddressId", customer.Address.AddressId);
+            command.ExecuteNonQuery();
+
+            // add customerId for customer
+            string customerIdQuery = "SELECT LAST_INSERT_ID() AS customerId";
+            command.CommandText = customerIdQuery;
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    customer.CustomerID = reader.GetInt32(0);
+                }
+            }
+
+            AddCustomerToList(customer);
         }
 
         public static Customer GetCustomer(int atIndex)

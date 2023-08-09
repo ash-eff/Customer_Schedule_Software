@@ -40,7 +40,6 @@ namespace software_2_c969
 
 		private void SetLanguageForUser(string languageCode)
         {
-			Console.WriteLine(languageCode);
 			switch (languageCode)
             {
 				case "en": //English
@@ -87,9 +86,11 @@ namespace software_2_c969
 
 				using (MySqlDataReader reader = command.ExecuteReader())
 				{
+					int userID = 0;
 					bool userFound = false;
 					while (reader.Read())
 					{
+						userID = reader.GetInt32("userId");
 						string userName = reader.GetString("userName");
 						string password = reader.GetString("password");
 						if (userName == textBox1.Text && password == textBox2.Text)
@@ -103,7 +104,7 @@ namespace software_2_c969
 					}
 					else
 					{
-						var nextForm = new Form2();
+						var nextForm = new Form2(userID);
 						nextForm.Show();
 						this.Hide();
 					}

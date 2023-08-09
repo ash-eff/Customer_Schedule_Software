@@ -25,9 +25,9 @@ namespace software_2_c969
         {
             txtId.Text = customer.CustomerID.ToString();
             txtName.Text = customer.Name;
-            txtAddress.Text = customer.Address.Address1;
-            txtAddressTwo.Text = customer.Address.Address2;
-            txtZip.Text = customer.Address.PostalCode;
+            txtAddress1.Text = customer.Address.Address1;
+            txtAddress2.Text = customer.Address.Address2;
+            txtPostalCode.Text = customer.Address.PostalCode;
             txtPhone.Text = customer.Address.Phone;
             txtCity.Text = customer.Address.City.Name;
             txtCountry.Text = customer.Address.City.Country.Name;
@@ -41,17 +41,16 @@ namespace software_2_c969
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCustomer();
-            CustomerRecords.UpdateCustomerData(customer);
+            CustomerRecords.UpdateCustomerData(customer, _parentForm.GetWorkingUser);
             this.Hide();
         }
 
         private void UpdateCustomer()
         {
-            customer.CustomerID = int.Parse(txtId.Text);
             customer.Name = txtName.Text;
-            customer.Address.Address1 = txtAddress.Text;
-            customer.Address.Address2 = txtAddressTwo.Text;
-            customer.Address.PostalCode = txtZip.Text;
+            customer.Address.Address1 = txtAddress1.Text;
+            customer.Address.Address2 = txtAddress2.Text;
+            customer.Address.PostalCode = txtPostalCode.Text;
             customer.Address.Phone = txtPhone.Text;
             customer.Address.City.Name = txtCity.Text;
             customer.Address.City.Country.Name = txtCountry.Text;
