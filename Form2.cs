@@ -27,14 +27,52 @@ namespace software_2_c969
         {
             dgv.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dgv.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+            //dgv.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
             dgv.RowHeadersVisible = false;
+            dgv.Columns.Add("CustomerIDColumn", "Customer ID");
+            dgv.Columns["CustomerIDColumn"].DataPropertyName = "CustomerID";
+
+            dgv.Columns.Add("NameColumn", "Name");
+            dgv.Columns["NameColumn"].DataPropertyName = "Name";
+
+            dgv.Columns.Add("Address1Column", "Address 1");
+            dgv.Columns["Address1Column"].DataPropertyName = "Address.Address1";
+
+            dgv.Columns.Add("Address2Column", "Address 2");
+            dgv.Columns["Address1Column"].DataPropertyName = "Address.Address2";
+
+            dgv.Columns.Add("PostalCodeColumn", "Postal Code");
+            dgv.Columns["PostalCodeColumn"].DataPropertyName = "Address.PostalCode";
+
+            dgv.Columns.Add("PhoneColumn", "Phone");
+            dgv.Columns["PhoneColumn"].DataPropertyName = "Address.Phone";
+
+            dgv.Columns.Add("CityColumn", "City");
+            dgv.Columns["CityColumn"].DataPropertyName = "Address.City.Name";
+
+            dgv.Columns.Add("CountryColumn", "Country");
+            dgv.Columns["CountryColumn"].DataPropertyName = "Address.City.Country.Name";
+
         }
 
         public void UpdateCustomerGrid()
         {
             dgvCustomers.AutoGenerateColumns = false;
-            dgvCustomers.DataSource = CustomerRecords.GetAllCustomers;
+            BindingList<Customer> customers = CustomerRecords.GetAllCustomers;
+
+            foreach (Customer c in customers)
+            {
+                Console.WriteLine(c.CustomerID);
+                Console.WriteLine(c.Name);
+                Console.WriteLine(c.Address.Address1);
+                Console.WriteLine(c.Address.Address2);
+                Console.WriteLine(c.Address.PostalCode);
+                Console.WriteLine(c.Address.Phone);
+                Console.WriteLine(c.Address.City.Name);
+                Console.WriteLine(c.Address.City.Country.Name);
+                Console.WriteLine("------------------------------");
+            }
+            dgvCustomers.DataSource = customers;
             RefreshData();
         }
 
