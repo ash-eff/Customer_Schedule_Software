@@ -18,6 +18,7 @@ namespace software_2_c969
         public Form3(Form2 parentForm)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             _parentForm = parentForm;
         }
 

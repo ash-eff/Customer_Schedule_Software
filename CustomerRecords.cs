@@ -186,7 +186,6 @@ namespace software_2_c969
             }
         }
 
-
         private static void UpdateCustomerInfo(MySqlCommand command, Customer customer, string user)
         {
             string customerQuery = "UPDATE customer " +
@@ -224,7 +223,7 @@ namespace software_2_c969
         public static Customer GetCustomer(int atIndex)
         {
             return Customers[atIndex];
-        }
+        }  
 
         private static void AddCustomerToList(Customer customer)
         {

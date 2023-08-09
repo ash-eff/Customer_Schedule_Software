@@ -77,22 +77,13 @@ namespace software_2_c969
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(dgvCustomers.Rows.Count > 0)
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this customer?", "Delete", MessageBoxButtons.YesNo);
-                if(dialogResult == DialogResult.Yes)
-                {
-                    int rowIndex = dgvCustomers.CurrentCell.RowIndex;
-                    CustomerRecords.DeleteCustomer(rowIndex);
-                    UpdateCustomerGrid();
-                }
-            }
+
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var nextForm = new Form3(this);
-            nextForm.Show();
+            nextForm.ShowDialog(this);
             //this.Hide();
         }
 
@@ -106,6 +97,13 @@ namespace software_2_c969
                 nextForm.SetCustomer = customer;
                 nextForm.ShowDialog(this);
             }
+        }
+
+        private void btnSchedule_Click(object sender, EventArgs e)
+        {
+            var nextForm = new Form5(this);
+            nextForm.ShowDialog(this);
+            //this.Hide();
         }
     }
 }
