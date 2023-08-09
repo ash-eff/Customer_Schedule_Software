@@ -35,6 +35,7 @@ namespace software_2_c969
         {
             dgvCustomers.AutoGenerateColumns = false;
             dgvCustomers.DataSource = CustomerRecords.GetAllCustomers;
+            RefreshData();
         }
 
         public void RefreshData()

@@ -155,11 +155,13 @@ namespace software_2_c969
             // 
             // Column1
             // 
+            this.Column1.DataPropertyName = "CustomerID";
             this.Column1.HeaderText = "Customer ID";
             this.Column1.Name = "Column1";
             // 
             // Column2
             // 
+            this.Column2.DataPropertyName = "Name";
             this.Column2.HeaderText = "Customer Name";
             this.Column2.Name = "Column2";
             // 

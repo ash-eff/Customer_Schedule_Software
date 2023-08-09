@@ -61,6 +61,14 @@ namespace software_2_c969
                                 City city = new City(cityID, cityName, country);
                                 Address address = new Address(addressID, address1, address2, postalCode, phone, city);
                                 Customer customer = new Customer(customerId, customerName, address);
+                                Console.WriteLine(customer.Name);
+                                Console.WriteLine(customer.Address.Address1);
+                                Console.WriteLine(customer.Address.Address2);
+                                Console.WriteLine(customer.Address.PostalCode);
+                                Console.WriteLine(customer.Address.Phone);
+                                Console.WriteLine(customer.Address.City.Name);
+                                Console.WriteLine(customer.Address.City.Country.Name);
+                                Console.WriteLine("----------------------------");
                                 AddCustomerToList(customer);
                             }
                         }
