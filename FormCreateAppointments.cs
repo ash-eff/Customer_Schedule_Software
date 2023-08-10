@@ -27,7 +27,7 @@ namespace software_2_c969
             _parentForm = parentForm;
             GenerateDates(DateTime.Now);
             GenerateTimes();
-            //cmbType.SelectedIndex = 0;
+            cmbType.SelectedIndex = 0;
         }
 
         private void GenerateDates(DateTime fromDate)
@@ -54,7 +54,7 @@ namespace software_2_c969
         private void GenerateTimes()
         {
             TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
-            Console.WriteLine("Users Time Zone: " + userTimeZone);
+            TimeZoneInfo centralTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
 
             DateTime localStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
             DateTime localEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
@@ -65,7 +65,7 @@ namespace software_2_c969
             DateTime currentTime = localStartTime;
             while(currentTime <= localEndTime)
             {
-                DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, userTimeZone);
+                DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, centralTimeZone, userTimeZone);
                 Console.WriteLine("Converting " + currentTime.ToShortTimeString() + " to " + convertedTime.ToShortTimeString());
                 localTimes.Add(convertedTime);
                 currentTime = currentTime.Add(interval);

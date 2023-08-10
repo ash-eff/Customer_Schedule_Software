@@ -78,7 +78,7 @@ namespace software_2_c969
         {
             if (dgvAppointments.Rows.Count > 0)
             {
-                int rowIndex = dgvAppointments.CurrentCell.RowIndex;
+                int rowIndex = dgvAppointments.CurrentRow.Index;
                 DataGridViewRow selectedRow = dgvAppointments.SelectedRows[rowIndex];
                 Appointment selectedAppointment = selectedRow.DataBoundItem as Appointment;
                 if(selectedAppointment != null)
@@ -91,7 +91,17 @@ namespace software_2_c969
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            if (dgvAppointments.SelectedRows.Count > 0)
+            {
+                int rowIndex = dgvAppointments.CurrentRow.Index;
+                DataGridViewRow selectedRow = dgvAppointments.SelectedRows[rowIndex];
+                Appointment selectedAppointment = selectedRow.DataBoundItem as Appointment;
+                if (selectedAppointment != null)
+                {
+                    var nextForm = new FormUpdateAppointments(this, selectedAppointment);
+                    nextForm.ShowDialog(this);
+                }
+            }
         }
     }
 }

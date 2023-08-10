@@ -36,13 +36,12 @@ namespace software_2_c969
                             if (!exists)
                             {
                                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+                                TimeZoneInfo centralTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
                                 int customerId = reader.GetInt32("customerId");
-                                string formattedStartDateTime = reader.GetString("start");
-                                DateTime startDateTime = DateTime.Parse(formattedStartDateTime);
-                                DateTime localStartTime = TimeZoneInfo.ConvertTimeFromUtc(startDateTime, localTimeZone);
-                                string formattedEndDateTime = reader.GetString("end");
-                                DateTime endDateTime = DateTime.Parse(formattedEndDateTime);
-                                DateTime localEndTime = TimeZoneInfo.ConvertTimeFromUtc(endDateTime, localTimeZone);
+                                DateTime startDateTime = reader.GetDateTime("start");
+                                DateTime localStartTime = TimeZoneInfo.ConvertTime(startDateTime, centralTimeZone, localTimeZone);
+                                DateTime endDateTime = reader.GetDateTime("end");
+                                DateTime localEndTime = TimeZoneInfo.ConvertTime(endDateTime, centralTimeZone, localTimeZone);
                                 string selectedAppointmentType = reader.GetString("type");
                                 int userId = reader.GetInt32("userId");
                                 Appointment newAppointment = new Appointment(customerId, localStartTime, localEndTime, selectedAppointmentType, userId);

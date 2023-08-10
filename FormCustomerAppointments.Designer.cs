@@ -37,14 +37,14 @@ namespace software_2_c969
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
@@ -160,9 +160,45 @@ namespace software_2_c969
             this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvAppointments.Location = new System.Drawing.Point(3, 3);
             this.dgvAppointments.Name = "dgvAppointments";
+            this.dgvAppointments.ReadOnly = true;
             this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAppointments.Size = new System.Drawing.Size(608, 244);
             this.dgvAppointments.TabIndex = 1;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "AppointmentId";
+            this.Column2.HeaderText = "ID";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "StringDate";
+            this.Column3.HeaderText = "Date";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "StringStartTime";
+            this.Column4.HeaderText = "Start Time";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "StringEndTime";
+            this.Column5.HeaderText = "End Time";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "AppointmentType";
+            this.Column1.HeaderText = "Type";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // tableLayoutPanel4
             // 
@@ -208,36 +244,6 @@ namespace software_2_c969
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "AppointmentId";
-            this.Column2.HeaderText = "ID";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "StringDate";
-            this.Column3.HeaderText = "Date";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "StringStartTime";
-            this.Column4.HeaderText = "Start Time";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "StringEndTime";
-            this.Column5.HeaderText = "End Time";
-            this.Column5.Name = "Column5";
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "AppointmentType";
-            this.Column1.HeaderText = "Type";
-            this.Column1.Name = "Column1";
             // 
             // FormCustomerAppointments
             // 

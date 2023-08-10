@@ -14,19 +14,22 @@ namespace software_2_c969
     public partial class FormUpdateAppointments : Form
     {
         private FormCustomerAppointments _parentForm;
+        private Appointment workingAppointment;
         private string selectedDate;
         private string selectedTime;
         private string selectedEndTime;
         private string selectedAppointmentType;
+        const int APPOINTMENT_LENGTH = 60;
 
-        public FormUpdateAppointments(FormCustomerAppointments parentForm)
+        public FormUpdateAppointments(FormCustomerAppointments parentForm, Appointment appointment)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.WindowsDefaultLocation;
             _parentForm = parentForm;
+            workingAppointment = appointment;
             GenerateDates(DateTime.Now);
             GenerateTimes();
-            cmbType.SelectedIndex = 0;
+            PopulateFields();
         }
 
         private void GenerateDates(DateTime fromDate)
@@ -43,43 +46,57 @@ namespace software_2_c969
                     cmbBoxDate.Items.Add(currentDate.ToLongDateString());
                 }
             }
-
-            if (cmbBoxDate.Items.Count > 0)
-            {
-                cmbBoxDate.SelectedIndex = 0;
-            }
         }
 
         private void GenerateTimes()
         {
-            TimeSpan startTime = new TimeSpan(9, 0, 0);
-            TimeSpan endTime = new TimeSpan(14, 0, 0);
-            TimeSpan interval = TimeSpan.FromMinutes(15);
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            TimeZoneInfo centralTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
 
-            for (TimeSpan currentTime = startTime; currentTime < endTime; currentTime = currentTime.Add(interval))
+            DateTime localStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            DateTime localEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
+            TimeSpan interval = TimeSpan.FromMinutes(APPOINTMENT_LENGTH);
+
+            List<DateTime> localTimes = new List<DateTime>();
+
+            DateTime currentTime = localStartTime;
+            while (currentTime <= localEndTime)
             {
-                cmbTime.Items.Add($"{currentTime.Hours:D2}:{currentTime.Minutes:D2}");
+                DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, centralTimeZone, userTimeZone);
+                Console.WriteLine("Converting " + currentTime.ToShortTimeString() + " to " + convertedTime.ToShortTimeString());
+                localTimes.Add(convertedTime);
+                currentTime = currentTime.Add(interval);
             }
 
-            if (cmbTime.Items.Count > 0)
+            //cmbTime.Items.Clear();
+
+            foreach (DateTime localTime in localTimes)
             {
-                cmbTime.SelectedIndex = 0;
+                cmbTime.Items.Add(localTime.ToString());
             }
+        }
+
+        private void PopulateFields()
+        {
+            DateTime appointmentDate = workingAppointment.StartTime;
+            cmbBoxDate.SelectedIndex = cmbBoxDate.FindStringExact(appointmentDate.Date.ToString());
+            cmbTime.SelectedIndex = cmbTime.FindStringExact(appointmentDate.TimeOfDay.ToString());
+            cmbType.SelectedIndex = cmbType.FindStringExact(workingAppointment.AppointmentType);
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
             int customerId = _parentForm.GetWorkingCustomer.CustomerID;
             int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
-            DateTime date = DateTime.Parse(selectedDate);
-            TimeSpan startTime = TimeSpan.Parse(selectedTime);
-            TimeSpan endTime = TimeSpan.Parse(selectedEndTime);
-            DateTime combinedStartDateTime = date.Date + startTime;
-            DateTime combinedEndDateTime = date.Date + endTime;
+            //DateTime date = DateTime.Parse(selectedDate);
+            DateTime startTime = DateTime.Parse(selectedTime);
+            DateTime endTime = DateTime.Parse(selectedEndTime);
+            //DateTime combinedStartDateTime = date.Date + startTime.TimeOfDay;
+            //DateTime combinedEndDateTime = date.Date + endTime.TimeOfDay;
             //string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
             //string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            //Appointment newAppointment = new Appointment(customerId, formattedStartDateTime, formattedEndDateTime, selectedAppointmentType, userId);
-            //CustomerAppointments.AddAppointmentData(newAppointment);
+            Appointment newAppointment = new Appointment(customerId, startTime, endTime, selectedAppointmentType, userId);
+            CustomerAppointments.AddAppointmentData(newAppointment);
             this.Hide();
         }
 
@@ -96,10 +113,10 @@ namespace software_2_c969
         private void cmbTime_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedTime = cmbTime.Text;
-            TimeSpan timeSpan = TimeSpan.ParseExact(selectedTime, "hh\\:mm", CultureInfo.InvariantCulture);
-            TimeSpan interval = TimeSpan.FromMinutes(15);
-            TimeSpan dateTimeEnd = timeSpan.Add(interval);
-            selectedEndTime = $"{dateTimeEnd.Hours:D2}:{dateTimeEnd.Minutes:D2}";
+            DateTime timeSpan = DateTime.Parse(selectedTime);
+            TimeSpan interval = TimeSpan.FromMinutes(APPOINTMENT_LENGTH);
+            DateTime dateTimeEnd = timeSpan.Add(interval);
+            selectedEndTime = dateTimeEnd.ToString();
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
