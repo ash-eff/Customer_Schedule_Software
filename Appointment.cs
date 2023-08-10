@@ -32,5 +32,20 @@ namespace software_2_c969
             string year = startTime.Year.ToString();
             StringDate = month + "/" + day + "/" + year;
         }
+
+        public void Update(int customerId, DateTime startTime, DateTime endTime, string appointmentType, int createdByUser)
+        {
+            CustomerId = customerId;
+            StartTime = startTime;
+            EndTime = endTime;
+            AppointmentType = appointmentType;
+            CreatedByUser = createdByUser;
+            StringStartTime = startTime.TimeOfDay.ToString();
+            StringEndTime = endTime.TimeOfDay.ToString();
+            string day = startTime.Day.ToString();
+            string month = startTime.Month.ToString();
+            string year = startTime.Year.ToString();
+            StringDate = month + "/" + day + "/" + year;
+        }
     }
 }

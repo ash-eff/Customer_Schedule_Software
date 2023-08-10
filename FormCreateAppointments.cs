@@ -66,7 +66,6 @@ namespace software_2_c969
             while(currentTime <= localEndTime)
             {
                 DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, centralTimeZone, userTimeZone);
-                Console.WriteLine("Converting " + currentTime.ToShortTimeString() + " to " + convertedTime.ToShortTimeString());
                 localTimes.Add(convertedTime);
                 currentTime = currentTime.Add(interval);
             }
@@ -75,7 +74,7 @@ namespace software_2_c969
 
             foreach(DateTime localTime in localTimes)
             {
-                cmbTime.Items.Add(localTime.ToString());
+                cmbTime.Items.Add(localTime.ToString("hh:mm tt"));
             }
 
             if(cmbTime.Items.Count > 0)
@@ -88,14 +87,12 @@ namespace software_2_c969
         {
             int customerId = _parentForm.GetWorkingCustomer.CustomerID;
             int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
-            //DateTime date = DateTime.Parse(selectedDate);
+            DateTime date = DateTime.Parse(selectedDate);
             DateTime startTime = DateTime.Parse(selectedTime);
             DateTime endTime = DateTime.Parse(selectedEndTime);
-            //DateTime combinedStartDateTime = date.Date + startTime.TimeOfDay;
-            //DateTime combinedEndDateTime = date.Date + endTime.TimeOfDay;
-            //string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            //string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            Appointment newAppointment = new Appointment(customerId, startTime, endTime, selectedAppointmentType, userId);
+            DateTime finalStartTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, startTime.Second);
+            DateTime finalEndTime = new DateTime(date.Year, date.Month, date.Day, endTime.Hour, endTime.Minute, endTime.Second);
+            Appointment newAppointment = new Appointment(customerId, finalStartTime, finalEndTime, selectedAppointmentType, userId);
             CustomerAppointments.AddAppointmentData(newAppointment);
             this.Hide();
         }

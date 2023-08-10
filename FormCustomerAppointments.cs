@@ -76,10 +76,10 @@ namespace software_2_c969
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvAppointments.Rows.Count > 0)
+            if (dgvAppointments.SelectedRows.Count > 0)
             {
-                int rowIndex = dgvAppointments.CurrentRow.Index;
-                DataGridViewRow selectedRow = dgvAppointments.SelectedRows[rowIndex];
+
+                DataGridViewRow selectedRow = dgvAppointments.SelectedRows[0];
                 Appointment selectedAppointment = selectedRow.DataBoundItem as Appointment;
                 if(selectedAppointment != null)
                 {
@@ -93,8 +93,8 @@ namespace software_2_c969
         {
             if (dgvAppointments.SelectedRows.Count > 0)
             {
-                int rowIndex = dgvAppointments.CurrentRow.Index;
-                DataGridViewRow selectedRow = dgvAppointments.SelectedRows[rowIndex];
+                //int rowIndex = dgvAppointments.CurrentRow.Index;
+                DataGridViewRow selectedRow = dgvAppointments.SelectedRows[0];
                 Appointment selectedAppointment = selectedRow.DataBoundItem as Appointment;
                 if (selectedAppointment != null)
                 {

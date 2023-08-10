@@ -63,7 +63,6 @@ namespace software_2_c969
             while (currentTime <= localEndTime)
             {
                 DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, centralTimeZone, userTimeZone);
-                Console.WriteLine("Converting " + currentTime.ToShortTimeString() + " to " + convertedTime.ToShortTimeString());
                 localTimes.Add(convertedTime);
                 currentTime = currentTime.Add(interval);
             }
@@ -72,32 +71,21 @@ namespace software_2_c969
 
             foreach (DateTime localTime in localTimes)
             {
-                cmbTime.Items.Add(localTime.ToString());
+                cmbTime.Items.Add(localTime.ToString("hh:mm tt"));
+            }
+
+            if (cmbTime.Items.Count > 0)
+            {
+                cmbTime.SelectedIndex = 0;
             }
         }
 
         private void PopulateFields()
         {
             DateTime appointmentDate = workingAppointment.StartTime;
-            cmbBoxDate.SelectedIndex = cmbBoxDate.FindStringExact(appointmentDate.Date.ToString());
-            cmbTime.SelectedIndex = cmbTime.FindStringExact(appointmentDate.TimeOfDay.ToString());
+            cmbBoxDate.SelectedIndex = cmbBoxDate.FindStringExact(appointmentDate.ToLongDateString());
+            cmbTime.SelectedIndex = cmbTime.FindStringExact(appointmentDate.ToString("hh:mm tt"));
             cmbType.SelectedIndex = cmbType.FindStringExact(workingAppointment.AppointmentType);
-        }
-
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            int customerId = _parentForm.GetWorkingCustomer.CustomerID;
-            int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
-            //DateTime date = DateTime.Parse(selectedDate);
-            DateTime startTime = DateTime.Parse(selectedTime);
-            DateTime endTime = DateTime.Parse(selectedEndTime);
-            //DateTime combinedStartDateTime = date.Date + startTime.TimeOfDay;
-            //DateTime combinedEndDateTime = date.Date + endTime.TimeOfDay;
-            //string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            //string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            Appointment newAppointment = new Appointment(customerId, startTime, endTime, selectedAppointmentType, userId);
-            CustomerAppointments.AddAppointmentData(newAppointment);
-            this.Hide();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -127,6 +115,21 @@ namespace software_2_c969
         private void Form6_FormClosing(object sender, FormClosingEventArgs e)
         {
             _parentForm.RefreshData();
+        }
+
+        private void btnUpdate_Click_1(object sender, EventArgs e)
+        {
+            {
+                int customerId = _parentForm.GetWorkingCustomer.CustomerID;
+                int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
+                DateTime date = DateTime.Parse(selectedDate);
+                DateTime startTime = DateTime.Parse(selectedTime);
+                DateTime endTime = DateTime.Parse(selectedEndTime);
+                DateTime finalStartTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, startTime.Second);
+                DateTime finalEndTime = new DateTime(date.Year, date.Month, date.Day, endTime.Hour, endTime.Minute, endTime.Second);
+                workingAppointment.Update(customerId, finalStartTime, finalEndTime, selectedAppointmentType, userId);
+                this.Hide();
+            }
         }
     }
 }

@@ -38,7 +38,7 @@ namespace software_2_c969
             this.cmbType = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnCreate = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +70,7 @@ namespace software_2_c969
             // 
             this.cmbBoxDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbBoxDate.FormattingEnabled = true;
-            this.cmbBoxDate.Location = new System.Drawing.Point(230, 67);
+            this.cmbBoxDate.Location = new System.Drawing.Point(230, 59);
             this.cmbBoxDate.Name = "cmbBoxDate";
             this.cmbBoxDate.Size = new System.Drawing.Size(377, 37);
             this.cmbBoxDate.TabIndex = 0;
@@ -100,7 +100,7 @@ namespace software_2_c969
             // 
             this.cmbTime.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbTime.FormattingEnabled = true;
-            this.cmbTime.Location = new System.Drawing.Point(230, 119);
+            this.cmbTime.Location = new System.Drawing.Point(230, 111);
             this.cmbTime.Name = "cmbTime";
             this.cmbTime.Size = new System.Drawing.Size(377, 37);
             this.cmbTime.TabIndex = 3;
@@ -123,7 +123,7 @@ namespace software_2_c969
             this.cmbType.Items.AddRange(new object[] {
             "Presentation",
             "Scrum"});
-            this.cmbType.Location = new System.Drawing.Point(230, 171);
+            this.cmbType.Location = new System.Drawing.Point(230, 163);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(377, 37);
             this.cmbType.TabIndex = 5;
@@ -135,7 +135,7 @@ namespace software_2_c969
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.btnCancel, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnCreate, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnUpdate, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 208);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -158,18 +158,18 @@ namespace software_2_c969
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnCreate
+            // btnUpdate
             // 
-            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCreate.Location = new System.Drawing.Point(3, 3);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(304, 44);
-            this.btnCreate.TabIndex = 8;
-            this.btnCreate.Text = "Update";
-            this.btnCreate.UseVisualStyleBackColor = true;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(3, 3);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(304, 44);
+            this.btnUpdate.TabIndex = 8;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click_1);
             // 
             // FormUpdateAppointments
             // 
@@ -199,6 +199,6 @@ namespace software_2_c969
         private System.Windows.Forms.ComboBox cmbType;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
