@@ -74,7 +74,6 @@ namespace software_2_c969
             }
 
             dgvAppointments.DataSource = customerAppointments;
-
             //RefreshData();
         }
 

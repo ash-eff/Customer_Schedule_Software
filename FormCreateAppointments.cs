@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace software_2_c969
 {
@@ -85,16 +87,83 @@ namespace software_2_c969
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            int customerId = _parentForm.GetWorkingCustomer.CustomerID;
-            int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
-            DateTime date = DateTime.Parse(selectedDate);
-            DateTime startTime = DateTime.Parse(selectedTime);
-            DateTime endTime = DateTime.Parse(selectedEndTime);
-            DateTime finalStartTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, startTime.Second);
-            DateTime finalEndTime = new DateTime(date.Year, date.Month, date.Day, endTime.Hour, endTime.Minute, endTime.Second);
-            Appointment newAppointment = new Appointment(customerId, finalStartTime, finalEndTime, selectedAppointmentType, userId);
-            CustomerAppointments.AddAppointmentData(newAppointment);
-            this.Hide();
+            try
+            {
+                int customerId = _parentForm.GetWorkingCustomer.CustomerID;
+                int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
+                DateTime date = DateTime.Parse(selectedDate);
+                DateTime startTime = DateTime.Parse(selectedTime);
+                DateTime endTime = DateTime.Parse(selectedEndTime);
+                DateTime finalStartTime = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, startTime.Second);
+                DateTime finalEndTime = new DateTime(date.Year, date.Month, date.Day, endTime.Hour, endTime.Minute, endTime.Second);
+
+                if (!IsWithinWorkingHours(startTime, endTime))
+                {
+                    MessageBox.Show("Appointments must be scheduled during hours of operation.", "Invalid Appointment Time.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (!IsAnAvailableTime(finalStartTime))
+                {
+                    MessageBox.Show("This time overlaps with an appointment that you already have.", "Unavailable Appointment Time.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    Appointment newAppointment = new Appointment(customerId, finalStartTime, finalEndTime, selectedAppointmentType, userId);
+                    CustomerAppointments.AddAppointmentData(newAppointment);
+                    this.Hide();
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Date/Time Parsing Error: " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error adding requested appointment: " + ex.Message, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private bool IsWithinWorkingHours(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan validStartingTime = new TimeSpan(9, 0, 0);
+            TimeSpan validEndingTime = new TimeSpan(14, 0, 0);
+
+            return startTime.TimeOfDay >= validStartingTime && endTime.TimeOfDay <= validEndingTime; // LAMBDA comparing starting and ending hours. Done because it looks cleaner than an if statement 
+        }
+
+        private bool IsAnAvailableTime(DateTime startTime)
+        {
+            Customer customer = _parentForm.GetWorkingCustomer;
+            string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            string appointmentQuery = "SELECT start FROM appointment WHERE customerId = @customerId";
+            List<DateTime> appointmentTimes = new List<DateTime>();
+
+            using (MySqlConnection connection = new MySqlConnection(connectingString))
+            {
+                connection.Open();
+                
+                using(MySqlCommand command = new MySqlCommand(appointmentQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@customerId", customer.CustomerID);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime appointmentTime = reader.GetDateTime(0);
+                            appointmentTimes.Add(appointmentTime);
+                        }
+                    }
+                }
+            }
+
+            foreach(DateTime appintmentTime in appointmentTimes)
+            {
+                if(appintmentTime == startTime)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
