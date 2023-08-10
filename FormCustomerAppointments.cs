@@ -14,7 +14,7 @@ namespace software_2_c969
     {
         private FormMain _parentForm;
         private Customer customer = null;
-
+        private bool showThirtyDays = true;
         public FormMain GetParentForm {  get { return _parentForm; } }
         public Customer GetWorkingCustomer {  get { return customer; } }
 
@@ -24,9 +24,8 @@ namespace software_2_c969
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             _parentForm = parentForm;
-            comboBox1.SelectedIndex = 0;
+            cmbSelect.SelectedIndex = 0;
             BuildDataGridView(dgvAppointments);
-            
         }
 
         public void RefreshData()
@@ -47,17 +46,34 @@ namespace software_2_c969
         {
             BindingList<Appointment> appointments = CustomerAppointments.GetAllAppointments;
             BindingList<Appointment> customerAppointments = new BindingList<Appointment>();
+
+            DateTime todaysDate = DateTime.Today;
+
             foreach(Appointment appointment in appointments)
-            {
+            { 
+                if (customer == null) { break; }
                 if (appointment.CustomerId == customer.CustomerID)
                 {
-                    customerAppointments.Add(appointment);
+                    if (!showThirtyDays)
+                    {
+                        DateTime nextSevenDays = todaysDate.AddDays(7);
+                        if(appointment.StartTime >= todaysDate && appointment.StartTime < nextSevenDays)
+                        {
+                            customerAppointments.Add(appointment);
+                        }
+                    }
+                    else
+                    {
+                        DateTime nextThirtyDays = todaysDate.AddDays(30);
+                        if (appointment.StartTime >= todaysDate && appointment.StartTime < nextThirtyDays)
+                        {
+                            customerAppointments.Add(appointment);
+                        }
+                    }
                 }
             }
-            if(appointments.Count > 0)
-            {
-                dgvAppointments.DataSource = customerAppointments;
-            }
+
+            dgvAppointments.DataSource = customerAppointments;
 
             //RefreshData();
         }
@@ -102,6 +118,13 @@ namespace software_2_c969
                     nextForm.ShowDialog(this);
                 }
             }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbSelect.SelectedIndex == 0) { showThirtyDays = true; }
+            else { showThirtyDays = false; }
+            UpdateAppointmentGrid();
         }
     }
 }

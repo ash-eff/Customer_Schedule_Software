@@ -32,7 +32,7 @@ namespace software_2_c969
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbSelect = new System.Windows.Forms.ComboBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -71,7 +71,7 @@ namespace software_2_c969
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.36364F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.74026F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.cmbSelect, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 41);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -91,20 +91,20 @@ namespace software_2_c969
             this.label1.TabIndex = 2;
             this.label1.Text = "View Appointments by";
             // 
-            // comboBox1
+            // cmbSelect
             // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "All Time",
-            "Current Week",
-            "Current Month"});
-            this.comboBox1.Location = new System.Drawing.Point(181, 3);
-            this.comboBox1.MaxDropDownItems = 3;
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(216, 32);
-            this.comboBox1.TabIndex = 9;
+            this.cmbSelect.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cmbSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbSelect.FormattingEnabled = true;
+            this.cmbSelect.Items.AddRange(new object[] {
+            "Next 30 Days",
+            "Next 7 Days"});
+            this.cmbSelect.Location = new System.Drawing.Point(181, 3);
+            this.cmbSelect.MaxDropDownItems = 3;
+            this.cmbSelect.Name = "cmbSelect";
+            this.cmbSelect.Size = new System.Drawing.Size(216, 32);
+            this.cmbSelect.TabIndex = 9;
+            this.cmbSelect.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // btnCreate
             // 
@@ -271,7 +271,7 @@ namespace software_2_c969
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbSelect;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.DataGridView dgvAppointments;
