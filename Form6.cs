@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,17 @@ namespace software_2_c969
 {
     public partial class Form6 : Form
     {
-        public Form6()
+        private Form5 _parentForm;
+        private string selectedDate;
+        private string selectedTime;
+        private string selectedEndTime;
+        private string selectedAppointmentType;
+
+        public Form6(Form5 parentForm)
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            this.StartPosition = FormStartPosition.WindowsDefaultLocation;
+            _parentForm = parentForm;
             GenerateDates(DateTime.Now);
             GenerateTimes();
             cmbType.SelectedIndex = 0;
@@ -50,7 +58,7 @@ namespace software_2_c969
 
             for(TimeSpan currentTime = startTime; currentTime < endTime; currentTime = currentTime.Add(interval))
             {
-                cmbTime.Items.Add(currentTime.ToString("hh:mm tt"));
+                cmbTime.Items.Add($"{currentTime.Hours:D2}:{currentTime.Minutes:D2}");
             }
 
             if(cmbTime.Items.Count > 0)
@@ -61,12 +69,47 @@ namespace software_2_c969
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
+            int customerId = _parentForm.GetWorkingCustomer.CustomerID;
+            int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
+            DateTime date = DateTime.Parse(selectedDate);
+            TimeSpan startTime = TimeSpan.Parse(selectedTime);
+            TimeSpan endTime = TimeSpan.Parse(selectedEndTime);
+            DateTime combinedStartDateTime = date.Date + startTime;
+            DateTime combinedEndDateTime = date.Date + endTime;
+            string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            Appointment newAppointment = new Appointment(customerId, formattedStartDateTime, formattedEndDateTime, selectedAppointmentType, userId);
+            CustomerAppointments.AddAppointmentData(newAppointment);
+            this.Hide();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.Hide();
+        }
 
+        private void cmbBoxDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedDate = cmbBoxDate.Text;
+        }
+
+        private void cmbTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedTime = cmbTime.Text;
+            TimeSpan timeSpan = TimeSpan.ParseExact(selectedTime, "hh\\:mm", CultureInfo.InvariantCulture);
+            TimeSpan interval = TimeSpan.FromMinutes(15);
+            TimeSpan dateTimeEnd = timeSpan.Add(interval);
+            selectedEndTime = $"{dateTimeEnd.Hours:D2}:{dateTimeEnd.Minutes:D2}";
+        }
+
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedAppointmentType = cmbType.Text;
+        }
+
+        private void Form6_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _parentForm.RefreshData();
         }
     }
 }

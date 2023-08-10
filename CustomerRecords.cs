@@ -17,11 +17,10 @@ namespace software_2_c969
 
         private static string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
 
-        public static void DeleteCustomer(int atIndex)
+        public static void DeleteCustomer(Customer customer)
         {
-            int customerId = Customers[atIndex].CustomerID;
-            Customers.RemoveAt(atIndex);
-            RemoveCustomerFromData(customerId);
+            Customers.Remove(customer);
+            RemoveCustomerFromData(customer);
         }
 
         public static void LoadCustomersFromData()
@@ -230,7 +229,7 @@ namespace software_2_c969
             Customers.Add(customer);
         }
 
-        private static void RemoveCustomerFromData(int customerId)
+        private static void RemoveCustomerFromData(Customer customer)
         {
             
             using (MySqlConnection connection = new MySqlConnection(connectingString))
@@ -242,7 +241,7 @@ namespace software_2_c969
                 command.Connection = connection;
                 string query = "DELETE FROM customer WHERE customerId = @customerId";
                 command.CommandText = query;
-                command.Parameters.AddWithValue("@customerId", customerId);
+                command.Parameters.AddWithValue("@customerId", customer.CustomerID);
                 command.ExecuteNonQuery();
             }
         }

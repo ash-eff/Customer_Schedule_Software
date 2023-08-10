@@ -30,7 +30,7 @@ namespace software_2_c969
         private void btnSave_Click(object sender, EventArgs e)
         {
             UpdateCustomer();
-            CustomerRecords.AddCustomerData(customer, _parentForm.GetWorkingUser);
+            CustomerRecords.AddCustomerData(customer, _parentForm.GetWorkingUser.Name);
             this.Hide();
         }
 

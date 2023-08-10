@@ -14,8 +14,8 @@ namespace software_2_c969
 {
     public partial class Form2 : Form
     {
-        private string workingUser = null;
-        public string GetWorkingUser { get { return workingUser; } }
+        private User workingUser;
+        public User GetWorkingUser { get { return workingUser; } }
 
         public Form2(int userID)
         {
@@ -24,6 +24,7 @@ namespace software_2_c969
             SetWorkingUser(userID);
             BuildDataGridView(dgvCustomers);
             CustomerRecords.LoadCustomersFromData();
+            CustomerAppointments.LoadAppointmentsFromData();
             UpdateCustomerGrid();
         }
 
@@ -36,15 +37,15 @@ namespace software_2_c969
                 MySqlCommand command = new MySqlCommand();
                 command.Connection = connection;
 
-                string countryQuery = "SELECT userName FROM user WHERE userId = @userId";
+                string countryQuery = "SELECT userId, userName FROM user WHERE userId = @userId";
                 command.CommandText = countryQuery;
                 command.Parameters.AddWithValue("@userId", userId);
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        workingUser = reader.GetString("userName");
-                        Console.WriteLine("Welcome, " + workingUser);
+                        workingUser = new User(reader.GetInt32("userId"), reader.GetString("userName"));
+                        Console.WriteLine("Welcome, " + workingUser.Name);
                     }
                 }
             }
@@ -77,7 +78,17 @@ namespace software_2_c969
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (dgvCustomers.Rows.Count > 0)
+            {
+                int rowIndex = dgvCustomers.CurrentCell.RowIndex;
+                DataGridViewRow selectedRow = dgvCustomers.SelectedRows[rowIndex];
+                Customer selectedCustomer = selectedRow.DataBoundItem as Customer;
+                if (selectedCustomer != null)
+                {
+                    CustomerRecords.DeleteCustomer(selectedCustomer);
+                    RefreshData();
+                }
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -101,7 +112,11 @@ namespace software_2_c969
 
         private void btnSchedule_Click(object sender, EventArgs e)
         {
+            int customerIndex = dgvCustomers.CurrentCell.RowIndex;
+            Customer customer = CustomerRecords.GetCustomer(customerIndex);
+            Console.WriteLine(customer.Name);
             var nextForm = new Form5(this);
+            nextForm.SetCustomer = customer;
             nextForm.ShowDialog(this);
             //this.Hide();
         }
