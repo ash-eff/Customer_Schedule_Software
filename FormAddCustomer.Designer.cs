@@ -1,7 +1,7 @@
 ﻿
 namespace software_2_c969
 {
-    partial class Form3
+    partial class FormAddCustomer
     {
         /// <summary>
         /// Required designer variable.

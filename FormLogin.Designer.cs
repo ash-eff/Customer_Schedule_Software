@@ -1,7 +1,7 @@
 ﻿
 namespace software_2_c969
 {
-	partial class Form1
+	partial class FormLogin
 	{
 		/// <summary>
 		/// Required designer variable.

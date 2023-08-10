@@ -13,13 +13,13 @@ using MySql.Data.MySqlClient;
 
 namespace software_2_c969
 {
-	public partial class Form1 : Form
+	public partial class FormLogin : Form
 	{
 		private MySqlConnection connection;
 		private string errorMessage;
 		private string errorTitle;
 
-		public Form1()
+		public FormLogin()
 		{
 			InitializeComponent();
 			this.StartPosition = FormStartPosition.CenterScreen;
@@ -104,7 +104,7 @@ namespace software_2_c969
 					}
 					else
 					{
-						var nextForm = new Form2(userID);
+						var nextForm = new FormMain(userID);
 						nextForm.Show();
 						this.Hide();
 					}

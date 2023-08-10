@@ -37,18 +37,18 @@ namespace software_2_c969
                             {
                                 int customerId = reader.GetInt32("customerId");
                                 string formattedStartDateTime = reader.GetString("start");
+                                DateTime startDateTime = DateTime.Parse(formattedStartDateTime);
                                 string formattedEndDateTime = reader.GetString("end");
+                                DateTime endDateTime = DateTime.Parse(formattedEndDateTime);
                                 string selectedAppointmentType = reader.GetString("type");
                                 int userId = reader.GetInt32("userId");
-                                Appointment newAppointment = new Appointment(customerId, formattedStartDateTime, formattedEndDateTime, selectedAppointmentType, userId);
+                                Appointment newAppointment = new Appointment(customerId, startDateTime, endDateTime, selectedAppointmentType, userId);
                                 newAppointment.AppointmentId = appointmentId;
                                 AddAppointmentToList(newAppointment);
                             }
                         }
                     }
                 }
-
-                Console.WriteLine("Number of appointments: " + Appointments.Count());
             }
         }
 
@@ -84,7 +84,6 @@ namespace software_2_c969
                 }
 
                 AddAppointmentToList(appointment);
-
             }
         }
 

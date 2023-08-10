@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace software_2_c969
 {
-    public partial class Form4 : Form
+    public partial class FormUpdateCustomer : Form
     {
-        private Form2 _parentForm;
+        private FormMain _parentForm;
         private Customer customer = null;
         public Customer SetCustomer { set { customer = value; PopulateFields(); } }
-        public Form4(Form2 parentForm)
+        public FormUpdateCustomer(FormMain parentForm)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

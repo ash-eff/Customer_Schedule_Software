@@ -1,7 +1,7 @@
 ﻿
 namespace software_2_c969
 {
-    partial class Form5
+    partial class FormCustomerAppointments
     {
         /// <summary>
         /// Required designer variable.
@@ -37,13 +37,14 @@ namespace software_2_c969
             this.btnClose = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
@@ -152,6 +153,7 @@ namespace software_2_c969
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAppointments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
+            this.Column3,
             this.Column4,
             this.Column5,
             this.Column1});
@@ -161,30 +163,6 @@ namespace software_2_c969
             this.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAppointments.Size = new System.Drawing.Size(608, 244);
             this.dgvAppointments.TabIndex = 1;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "AppointmentId";
-            this.Column2.HeaderText = "ID";
-            this.Column2.Name = "Column2";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "StartTime";
-            this.Column4.HeaderText = "Start";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "EndTime";
-            this.Column5.HeaderText = "End";
-            this.Column5.Name = "Column5";
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "AppointmentType";
-            this.Column1.HeaderText = "Type";
-            this.Column1.Name = "Column1";
             // 
             // tableLayoutPanel4
             // 
@@ -205,19 +183,6 @@ namespace software_2_c969
             this.tableLayoutPanel4.Size = new System.Drawing.Size(614, 50);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(309, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(147, 44);
-            this.btnDelete.TabIndex = 9;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // btnUpdate
             // 
             this.btnUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -231,7 +196,50 @@ namespace software_2_c969
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // Form5
+            // btnDelete
+            // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(309, 3);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(147, 44);
+            this.btnDelete.TabIndex = 9;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "AppointmentId";
+            this.Column2.HeaderText = "ID";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "StringDate";
+            this.Column3.HeaderText = "Date";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "StringStartTime";
+            this.Column4.HeaderText = "Start Time";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "StringEndTime";
+            this.Column5.HeaderText = "End Time";
+            this.Column5.Name = "Column5";
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "AppointmentType";
+            this.Column1.HeaderText = "Type";
+            this.Column1.Name = "Column1";
+            // 
+            // FormCustomerAppointments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -240,7 +248,7 @@ namespace software_2_c969
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Form5";
+            this.Name = "FormCustomerAppointments";
             this.Text = "Form5";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -263,10 +271,11 @@ namespace software_2_c969
         private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.Button btnUpdate;
     }
 }

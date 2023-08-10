@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace software_2_c969
 {
-    public partial class Form5 : Form
+    public partial class FormCustomerAppointments : Form
     {
-        private Form2 _parentForm;
+        private FormMain _parentForm;
         private Customer customer = null;
 
-        public Form2 GetParentForm {  get { return _parentForm; } }
+        public FormMain GetParentForm {  get { return _parentForm; } }
         public Customer GetWorkingCustomer {  get { return customer; } }
 
         public Customer SetCustomer { set { customer = value; this.Text = $"Appointments for {customer.Name}"; UpdateAppointmentGrid(); } }
-        public Form5(Form2 parentForm)
+        public FormCustomerAppointments(FormMain parentForm)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -69,7 +69,7 @@ namespace software_2_c969
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            var nextForm = new Form6(this);
+            var nextForm = new FormCreateAppointments(this);
             //nextForm.SetCustomer = customer;
             nextForm.ShowDialog(this);
         }

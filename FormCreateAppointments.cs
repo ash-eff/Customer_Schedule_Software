@@ -11,22 +11,23 @@ using System.Windows.Forms;
 
 namespace software_2_c969
 {
-    public partial class Form6 : Form
+    public partial class FormCreateAppointments : Form
     {
-        private Form5 _parentForm;
+        private FormCustomerAppointments _parentForm;
         private string selectedDate;
         private string selectedTime;
         private string selectedEndTime;
         private string selectedAppointmentType;
+        const int APPOINTMENT_LENGTH = 60;
 
-        public Form6(Form5 parentForm)
+        public FormCreateAppointments(FormCustomerAppointments parentForm)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.WindowsDefaultLocation;
             _parentForm = parentForm;
             GenerateDates(DateTime.Now);
             GenerateTimes();
-            cmbType.SelectedIndex = 0;
+            //cmbType.SelectedIndex = 0;
         }
 
         private void GenerateDates(DateTime fromDate)
@@ -52,13 +53,22 @@ namespace software_2_c969
 
         private void GenerateTimes()
         {
-            TimeSpan startTime = new TimeSpan(9, 0, 0);
-            TimeSpan endTime = new TimeSpan(14, 0, 0);
-            TimeSpan interval = TimeSpan.FromMinutes(15);
+            DateTime localStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
+            DateTime localEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
+            TimeSpan interval = TimeSpan.FromMinutes(APPOINTMENT_LENGTH);
 
-            for(TimeSpan currentTime = startTime; currentTime < endTime; currentTime = currentTime.Add(interval))
+            List<DateTime> utcTimes = new List<DateTime>();
+
+            DateTime currentTime = localStartTime;
+            while(currentTime <= localEndTime)
             {
-                cmbTime.Items.Add($"{currentTime.Hours:D2}:{currentTime.Minutes:D2}");
+                utcTimes.Add(currentTime.ToUniversalTime());
+                currentTime = currentTime.Add(interval);
+            }
+
+            foreach(DateTime utcTime in utcTimes)
+            {
+                cmbTime.Items.Add(utcTime.ToString());
             }
 
             if(cmbTime.Items.Count > 0)
@@ -71,14 +81,14 @@ namespace software_2_c969
         {
             int customerId = _parentForm.GetWorkingCustomer.CustomerID;
             int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
-            DateTime date = DateTime.Parse(selectedDate);
-            TimeSpan startTime = TimeSpan.Parse(selectedTime);
-            TimeSpan endTime = TimeSpan.Parse(selectedEndTime);
-            DateTime combinedStartDateTime = date.Date + startTime;
-            DateTime combinedEndDateTime = date.Date + endTime;
-            string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            Appointment newAppointment = new Appointment(customerId, formattedStartDateTime, formattedEndDateTime, selectedAppointmentType, userId);
+            //DateTime date = DateTime.Parse(selectedDate);
+            DateTime startTime = DateTime.Parse(selectedTime);
+            DateTime endTime = DateTime.Parse(selectedEndTime);
+            //DateTime combinedStartDateTime = date.Date + startTime.TimeOfDay;
+            //DateTime combinedEndDateTime = date.Date + endTime.TimeOfDay;
+            //string formattedStartDateTime = combinedStartDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            //string formattedEndDateTime = combinedEndDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            Appointment newAppointment = new Appointment(customerId, startTime, endTime, selectedAppointmentType, userId);
             CustomerAppointments.AddAppointmentData(newAppointment);
             this.Hide();
         }
@@ -96,10 +106,10 @@ namespace software_2_c969
         private void cmbTime_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedTime = cmbTime.Text;
-            TimeSpan timeSpan = TimeSpan.ParseExact(selectedTime, "hh\\:mm", CultureInfo.InvariantCulture);
-            TimeSpan interval = TimeSpan.FromMinutes(15);
-            TimeSpan dateTimeEnd = timeSpan.Add(interval);
-            selectedEndTime = $"{dateTimeEnd.Hours:D2}:{dateTimeEnd.Minutes:D2}";
+            DateTime timeSpan = DateTime.Parse(selectedTime);
+            TimeSpan interval = TimeSpan.FromMinutes(APPOINTMENT_LENGTH);
+            DateTime dateTimeEnd = timeSpan.Add(interval);
+            selectedEndTime = dateTimeEnd.ToString();
         }
 
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)

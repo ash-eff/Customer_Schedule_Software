@@ -12,12 +12,12 @@ using MySql.Data.MySqlClient;
 
 namespace software_2_c969
 {
-    public partial class Form2 : Form
+    public partial class FormMain : Form
     {
         private User workingUser;
         public User GetWorkingUser { get { return workingUser; } }
 
-        public Form2(int userID)
+        public FormMain(int userID)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -93,7 +93,7 @@ namespace software_2_c969
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var nextForm = new Form3(this);
+            var nextForm = new FormAddCustomer(this);
             nextForm.ShowDialog(this);
             //this.Hide();
         }
@@ -104,7 +104,7 @@ namespace software_2_c969
             {
                 int customerIndex = dgvCustomers.CurrentCell.RowIndex;
                 Customer customer = CustomerRecords.GetCustomer(customerIndex);
-                var nextForm = new Form4(this);
+                var nextForm = new FormUpdateCustomer(this);
                 nextForm.SetCustomer = customer;
                 nextForm.ShowDialog(this);
             }
@@ -115,7 +115,7 @@ namespace software_2_c969
             int customerIndex = dgvCustomers.CurrentCell.RowIndex;
             Customer customer = CustomerRecords.GetCustomer(customerIndex);
             Console.WriteLine(customer.Name);
-            var nextForm = new Form5(this);
+            var nextForm = new FormCustomerAppointments(this);
             nextForm.SetCustomer = customer;
             nextForm.ShowDialog(this);
             //this.Hide();
