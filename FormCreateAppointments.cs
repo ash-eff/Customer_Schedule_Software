@@ -53,22 +53,29 @@ namespace software_2_c969
 
         private void GenerateTimes()
         {
+            TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
+            Console.WriteLine("Users Time Zone: " + userTimeZone);
+
             DateTime localStartTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0);
-            DateTime localEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 14, 0, 0);
+            DateTime localEndTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 0, 0);
             TimeSpan interval = TimeSpan.FromMinutes(APPOINTMENT_LENGTH);
 
-            List<DateTime> utcTimes = new List<DateTime>();
+            List<DateTime> localTimes = new List<DateTime>();
 
             DateTime currentTime = localStartTime;
             while(currentTime <= localEndTime)
             {
-                utcTimes.Add(currentTime.ToUniversalTime());
+                DateTime convertedTime = TimeZoneInfo.ConvertTime(currentTime, userTimeZone);
+                Console.WriteLine("Converting " + currentTime.ToShortTimeString() + " to " + convertedTime.ToShortTimeString());
+                localTimes.Add(convertedTime);
                 currentTime = currentTime.Add(interval);
             }
 
-            foreach(DateTime utcTime in utcTimes)
+            //cmbTime.Items.Clear();
+
+            foreach(DateTime localTime in localTimes)
             {
-                cmbTime.Items.Add(utcTime.ToString());
+                cmbTime.Items.Add(localTime.ToString());
             }
 
             if(cmbTime.Items.Count > 0)

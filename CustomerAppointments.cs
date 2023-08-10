@@ -35,14 +35,17 @@ namespace software_2_c969
                             bool exists = Appointments.Any(a => a.AppointmentId == appointmentId); // lambda
                             if (!exists)
                             {
+                                TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
                                 int customerId = reader.GetInt32("customerId");
                                 string formattedStartDateTime = reader.GetString("start");
                                 DateTime startDateTime = DateTime.Parse(formattedStartDateTime);
+                                DateTime localStartTime = TimeZoneInfo.ConvertTimeFromUtc(startDateTime, localTimeZone);
                                 string formattedEndDateTime = reader.GetString("end");
                                 DateTime endDateTime = DateTime.Parse(formattedEndDateTime);
+                                DateTime localEndTime = TimeZoneInfo.ConvertTimeFromUtc(endDateTime, localTimeZone);
                                 string selectedAppointmentType = reader.GetString("type");
                                 int userId = reader.GetInt32("userId");
-                                Appointment newAppointment = new Appointment(customerId, startDateTime, endDateTime, selectedAppointmentType, userId);
+                                Appointment newAppointment = new Appointment(customerId, localStartTime, localEndTime, selectedAppointmentType, userId);
                                 newAppointment.AppointmentId = appointmentId;
                                 AddAppointmentToList(newAppointment);
                             }
