@@ -103,7 +103,7 @@ namespace software_2_c969
                 }
                 else if (!IsAnAvailableTime(finalStartTime))
                 {
-                    MessageBox.Show("This time overlaps with an appointment that you already have.", "Unavailable Appointment Time.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("This time overlaps with an appointment that you already have with another customer.", "Unavailable Appointment Time.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
@@ -132,9 +132,10 @@ namespace software_2_c969
 
         private bool IsAnAvailableTime(DateTime startTime)
         {
-            Customer customer = _parentForm.GetWorkingCustomer;
+            int userId = _parentForm.GetParentForm.GetWorkingUser.UserId;
+            //Customer customer = _parentForm.GetWorkingCustomer;
             string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
-            string appointmentQuery = "SELECT start FROM appointment WHERE customerId = @customerId";
+            string appointmentQuery = "SELECT start FROM appointment WHERE userId = @userId";
             List<DateTime> appointmentTimes = new List<DateTime>();
 
             using (MySqlConnection connection = new MySqlConnection(connectingString))
@@ -143,7 +144,7 @@ namespace software_2_c969
                 
                 using(MySqlCommand command = new MySqlCommand(appointmentQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@customerId", customer.CustomerID);
+                    command.Parameters.AddWithValue("@userId", userId);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
@@ -155,15 +156,17 @@ namespace software_2_c969
                 }
             }
 
-            foreach(DateTime appintmentTime in appointmentTimes)
-            {
-                if(appintmentTime == startTime)
-                {
-                    return false;
-                }
-            }
+            return !appointmentTimes.Any(appointmentTime => appointmentTime == startTime); //LAMBDA more concise that what I had initiall (listed below)
 
-            return true;
+            //foreach(DateTime appintmentTime in appointmentTimes)
+            //{
+            //    if(appintmentTime == startTime)
+            //    {
+            //        return false;
+            //    }
+            //}
+            //
+            //return true;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

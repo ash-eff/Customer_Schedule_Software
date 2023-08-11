@@ -26,6 +26,7 @@ namespace software_2_c969
             CustomerRecords.LoadCustomersFromData();
             CustomerAppointments.LoadAppointmentsFromData();
             UpdateCustomerGrid();
+            CheckForUpcomingAppointments();
         }
 
         private void SetWorkingUser(int userId)
@@ -46,6 +47,36 @@ namespace software_2_c969
                     {
                         workingUser = new User(reader.GetInt32("userId"), reader.GetString("userName"));
                         Console.WriteLine("Welcome, " + workingUser.Name);
+                    }
+                }
+            }
+        }
+
+        private void CheckForUpcomingAppointments()
+        {
+            //DateTime testTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 48, 0);
+            DateTime currentTime = DateTime.Now;
+            string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            string appointmentQuery = "SELECT start FROM appointment WHERE userId = @userId";
+
+            using (MySqlConnection connection = new MySqlConnection(connectingString))
+            {
+                connection.Open();
+
+                using (MySqlCommand command = new MySqlCommand(appointmentQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@userId", workingUser.UserId);
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime appointmentTime = reader.GetDateTime(0);
+                            TimeSpan timeDifference = appointmentTime - currentTime;
+                            if(timeDifference.TotalMinutes <= 15 && timeDifference.TotalMinutes >= 0)
+                            {
+                                MessageBox.Show("You have an appointment at  " + appointmentTime.TimeOfDay, "Appointment Alert!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
+                        }
                     }
                 }
             }
@@ -78,10 +109,10 @@ namespace software_2_c969
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dgvCustomers.Rows.Count > 0)
+             if (dgvCustomers.SelectedRows.Count > 0)
             {
-                int rowIndex = dgvCustomers.CurrentCell.RowIndex;
-                DataGridViewRow selectedRow = dgvCustomers.SelectedRows[rowIndex];
+
+                DataGridViewRow selectedRow = dgvCustomers.SelectedRows[0];
                 Customer selectedCustomer = selectedRow.DataBoundItem as Customer;
                 if (selectedCustomer != null)
                 {
@@ -100,14 +131,7 @@ namespace software_2_c969
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(dgvCustomers.Rows.Count > 0)
-            {
-                int customerIndex = dgvCustomers.CurrentCell.RowIndex;
-                Customer customer = CustomerRecords.GetCustomer(customerIndex);
-                var nextForm = new FormUpdateCustomer(this);
-                nextForm.SetCustomer = customer;
-                nextForm.ShowDialog(this);
-            }
+
         }
 
         private void btnSchedule_Click(object sender, EventArgs e)
@@ -119,6 +143,12 @@ namespace software_2_c969
             nextForm.SetCustomer = customer;
             nextForm.ShowDialog(this);
             //this.Hide();
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+            var nextForm = new FormReports();
+            nextForm.ShowDialog(this);
         }
     }
 }

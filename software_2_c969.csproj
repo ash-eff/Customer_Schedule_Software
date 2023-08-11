@@ -102,6 +102,24 @@
     <Compile Include="Appointment.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Country.cs" />
+    <Compile Include="FormConsultantCountReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultantCountReports.Designer.cs">
+      <DependentUpon>FormConsultantCountReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormScheduleReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormScheduleReports.Designer.cs">
+      <DependentUpon>FormScheduleReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTypeReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTypeReports.Designer.cs">
+      <DependentUpon>FormTypeReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUpdateAppointments.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,7 +167,22 @@
     <Compile Include="FormUpdateCustomer.Designer.cs">
       <DependentUpon>FormUpdateCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReports.Designer.cs">
+      <DependentUpon>FormReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <EmbeddedResource Include="FormConsultantCountReports.resx">
+      <DependentUpon>FormConsultantCountReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormScheduleReports.resx">
+      <DependentUpon>FormScheduleReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTypeReports.resx">
+      <DependentUpon>FormTypeReports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUpdateAppointments.resx">
       <DependentUpon>FormUpdateAppointments.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +212,9 @@
     </Compile>
     <EmbeddedResource Include="FormUpdateCustomer.resx">
       <DependentUpon>FormUpdateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReports.resx">
+      <DependentUpon>FormReports.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\CustomerRecords.datasource" />

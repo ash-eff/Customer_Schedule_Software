@@ -66,11 +66,11 @@ namespace software_2_c969
                         "VALUES (@customerId, @userId, @default, @default, @default, @default, @appointmentType, @default, @start, @end, NOW(), @user, NOW(), @user)";
                 command.CommandText = appointmentQuery;
                 command.Parameters.AddWithValue("@customerId", appointment.CustomerId);
-                command.Parameters.AddWithValue("@userId", appointment.CreatedByUser);
+                command.Parameters.AddWithValue("@userId", appointment.UserId);
                 command.Parameters.AddWithValue("@appointmentType", appointment.AppointmentType);
                 command.Parameters.AddWithValue("@start", appointment.StartTime);
                 command.Parameters.AddWithValue("@end", appointment.EndTime);
-                command.Parameters.AddWithValue("@user", appointment.CreatedByUser.ToString());
+                command.Parameters.AddWithValue("@user", appointment.ScheduledBy);
                 command.Parameters.AddWithValue("@default", "not needed");
                 command.ExecuteNonQuery();
 
