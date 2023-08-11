@@ -125,7 +125,7 @@ namespace software_2_c969
         private bool IsWithinWorkingHours(DateTime startTime, DateTime endTime)
         {
             TimeSpan validStartingTime = new TimeSpan(9, 0, 0);
-            TimeSpan validEndingTime = new TimeSpan(14, 0, 0);
+            TimeSpan validEndingTime = new TimeSpan(17, 0, 0);
 
             return startTime.TimeOfDay >= validStartingTime && endTime.TimeOfDay <= validEndingTime; // LAMBDA comparing starting and ending hours. Done because it looks cleaner than an if statement 
         }
