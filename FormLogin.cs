@@ -26,8 +26,8 @@ namespace software_2_c969
 			InitializeDatabaseConnection();
 			SetLanguageForUser(GetLanguageCode());
 			// for testing only
-			textBox1.Text = "test";
-			textBox2.Text = "test";
+			//textBox1.Text = "test";
+			//textBox2.Text = "test";
 
 
 		}

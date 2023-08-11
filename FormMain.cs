@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace software_2_c969
 {
     public partial class FormMain : Form
     {
+        private const string LOGFILEPATH = "login_log.txt";
+
         private User workingUser;
         public User GetWorkingUser { get { return workingUser; } }
 
@@ -22,11 +25,30 @@ namespace software_2_c969
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             SetWorkingUser(userID);
+            RecordLogin(workingUser);
             BuildDataGridView(dgvCustomers);
             CustomerRecords.LoadCustomersFromData();
             CustomerAppointments.LoadAppointmentsFromData();
             UpdateCustomerGrid();
             CheckForUpcomingAppointments();
+        }
+
+        private void RecordLogin(User user)
+        {
+            try
+            {
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string logEntry = $"{timestamp} - User {user.Name} logged in";
+
+                using (StreamWriter writer = File.AppendText(LOGFILEPATH))
+                {
+                    writer.WriteLine(logEntry);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error recording login: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetWorkingUser(int userId)

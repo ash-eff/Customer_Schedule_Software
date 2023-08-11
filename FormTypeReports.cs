@@ -37,11 +37,8 @@ namespace software_2_c969
             BindingList<Appointment> appointments = CustomerAppointments.GetAllAppointments;
             foreach(Appointment appointment in appointments)
             {
-                Console.WriteLine("A: " + appointment.StartTime.ToString("MMMM"));
-                Console.WriteLine("B: " + cmbMonth.Text);
                 if (appointment.AppointmentType == cmbType.Text && appointment.StartTime.ToString("MMMM") == cmbMonth.Text)
                 {
-                    Console.WriteLine("adding");
                     appointmentsByType.Add(appointment);
                 }
             }
@@ -74,13 +71,13 @@ namespace software_2_c969
 
         private bool IsValidType()
         {
-            if(cmbType.Text == "") { return false; }
+            if(string.IsNullOrWhiteSpace(cmbType.Text)) { return false; }
             return true;
         }
 
         private bool IsValidMonth()
         {
-            if (cmbMonth.Text == "") { return false; }
+            if (string.IsNullOrWhiteSpace(cmbMonth.Text)) { return false; }
             return true;
         }
     }
