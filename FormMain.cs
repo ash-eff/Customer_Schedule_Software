@@ -133,7 +133,6 @@ namespace software_2_c969
         {
              if (dgvCustomers.SelectedRows.Count > 0)
             {
-
                 DataGridViewRow selectedRow = dgvCustomers.SelectedRows[0];
                 Customer selectedCustomer = selectedRow.DataBoundItem as Customer;
                 if (selectedCustomer != null)
@@ -153,14 +152,18 @@ namespace software_2_c969
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-
+            int customerIndex = dgvCustomers.CurrentCell.RowIndex;
+            Customer customer = CustomerRecords.GetCustomer(customerIndex);
+            var nextForm = new FormUpdateCustomer(this);
+            nextForm.SetCustomer = customer;
+            nextForm.ShowDialog(this);
+            //this.Hide();
         }
 
         private void btnSchedule_Click(object sender, EventArgs e)
         {
             int customerIndex = dgvCustomers.CurrentCell.RowIndex;
             Customer customer = CustomerRecords.GetCustomer(customerIndex);
-            Console.WriteLine(customer.Name);
             var nextForm = new FormCustomerAppointments(this);
             nextForm.SetCustomer = customer;
             nextForm.ShowDialog(this);
@@ -170,6 +173,12 @@ namespace software_2_c969
         private void btnReports_Click(object sender, EventArgs e)
         {
             var nextForm = new FormReports();
+            nextForm.ShowDialog(this);
+        }
+
+        private void btnCalendar_Click(object sender, EventArgs e)
+        {
+            var nextForm = new FormCalendar();
             nextForm.ShowDialog(this);
         }
     }

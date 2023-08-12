@@ -89,6 +89,18 @@ namespace software_2_c969
             }
         }
 
+        public static void DeleteAllCustomerAppointments(Customer customer)
+        {
+            for(int index = 0; index < Appointments.Count(); index++)
+            {
+                if (Appointments[index].CustomerId == customer.CustomerID)
+                {
+                    RemoveAppointmentFromData(Appointments[index]);
+                    Appointments.RemoveAt(index);
+                }
+            }
+        }
+
         public static void DeleteAppointment(Appointment appointment)
         {
             Appointments.Remove(appointment);

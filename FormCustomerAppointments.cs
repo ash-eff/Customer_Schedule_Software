@@ -14,11 +14,11 @@ namespace software_2_c969
     {
         private FormMain _parentForm;
         private Customer customer = null;
-        private bool showThirtyDays = true;
         public FormMain GetParentForm {  get { return _parentForm; } }
-        public Customer GetWorkingCustomer {  get { return customer; } }
+        public Customer GetWorkingCustomer { get { return customer; } }
 
         public Customer SetCustomer { set { customer = value; this.Text = $"Appointments for {customer.Name}"; UpdateAppointmentGrid(); } }
+
         public FormCustomerAppointments(FormMain parentForm)
         {
             InitializeComponent();
@@ -54,15 +54,15 @@ namespace software_2_c969
                 if (customer == null) { break; }
                 if (appointment.CustomerId == customer.CustomerID)
                 {
-                    if (!showThirtyDays)
+                    if (cmbSelect.Text == "Next 7 Days")
                     {
                         DateTime nextSevenDays = todaysDate.AddDays(7);
-                        if(appointment.StartTime >= todaysDate && appointment.StartTime < nextSevenDays)
+                        if (appointment.StartTime >= todaysDate && appointment.StartTime < nextSevenDays)
                         {
                             customerAppointments.Add(appointment);
                         }
                     }
-                    else
+                    else if (cmbSelect.Text == "Next 30 Days")
                     {
                         DateTime nextThirtyDays = todaysDate.AddDays(30);
                         if (appointment.StartTime >= todaysDate && appointment.StartTime < nextThirtyDays)
@@ -70,7 +70,11 @@ namespace software_2_c969
                             customerAppointments.Add(appointment);
                         }
                     }
-                }
+                    else
+                    {
+                        customerAppointments.Add(appointment);
+                    }
+                }      
             }
 
             dgvAppointments.DataSource = customerAppointments;
@@ -121,8 +125,6 @@ namespace software_2_c969
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cmbSelect.SelectedIndex == 0) { showThirtyDays = true; }
-            else { showThirtyDays = false; }
             UpdateAppointmentGrid();
         }
     }

@@ -19,6 +19,7 @@ namespace software_2_c969
 
         public static void DeleteCustomer(Customer customer)
         {
+            CustomerAppointments.DeleteAllCustomerAppointments(customer);
             Customers.Remove(customer);
             RemoveCustomerFromData(customer);
         }
