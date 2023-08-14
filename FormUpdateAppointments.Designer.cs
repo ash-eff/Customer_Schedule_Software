@@ -70,7 +70,7 @@ namespace software_2_c969
             // 
             this.cmbBoxDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbBoxDate.FormattingEnabled = true;
-            this.cmbBoxDate.Location = new System.Drawing.Point(230, 59);
+            this.cmbBoxDate.Location = new System.Drawing.Point(230, 67);
             this.cmbBoxDate.Name = "cmbBoxDate";
             this.cmbBoxDate.Size = new System.Drawing.Size(377, 37);
             this.cmbBoxDate.TabIndex = 0;
@@ -100,7 +100,7 @@ namespace software_2_c969
             // 
             this.cmbTime.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cmbTime.FormattingEnabled = true;
-            this.cmbTime.Location = new System.Drawing.Point(230, 111);
+            this.cmbTime.Location = new System.Drawing.Point(230, 119);
             this.cmbTime.Name = "cmbTime";
             this.cmbTime.Size = new System.Drawing.Size(377, 37);
             this.cmbTime.TabIndex = 3;
@@ -123,7 +123,7 @@ namespace software_2_c969
             this.cmbType.Items.AddRange(new object[] {
             "Presentation",
             "Scrum"});
-            this.cmbType.Location = new System.Drawing.Point(230, 163);
+            this.cmbType.Location = new System.Drawing.Point(230, 171);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(377, 37);
             this.cmbType.TabIndex = 5;

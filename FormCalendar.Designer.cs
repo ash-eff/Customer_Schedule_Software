@@ -37,12 +37,11 @@ namespace software_2_c969
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvAppointments = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
@@ -98,7 +97,7 @@ namespace software_2_c969
             "All Time",
             "Next 30 Days",
             "Next 7 Days"});
-            this.cmbSelect.Location = new System.Drawing.Point(323, 3);
+            this.cmbSelect.Location = new System.Drawing.Point(322, 3);
             this.cmbSelect.MaxDropDownItems = 3;
             this.cmbSelect.Name = "cmbSelect";
             this.cmbSelect.Size = new System.Drawing.Size(207, 32);
@@ -129,7 +128,7 @@ namespace software_2_c969
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 376F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1134, 376);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
@@ -138,12 +137,11 @@ namespace software_2_c969
             this.dgvAppointments.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAppointments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column2,
+            this.Column6,
             this.Column3,
             this.Column4,
             this.Column5,
-            this.Column1,
-            this.Column6});
+            this.Column1});
             this.dgvAppointments.Dock = System.Windows.Forms.DockStyle.Top;
             this.dgvAppointments.Location = new System.Drawing.Point(3, 3);
             this.dgvAppointments.Name = "dgvAppointments";
@@ -168,12 +166,12 @@ namespace software_2_c969
             this.tableLayoutPanel4.Size = new System.Drawing.Size(1134, 166);
             this.tableLayoutPanel4.TabIndex = 3;
             // 
-            // Column2
+            // Column6
             // 
-            this.Column2.DataPropertyName = "AppointmentId";
-            this.Column2.HeaderText = "ID";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.Column6.DataPropertyName = "ScheduledFor";
+            this.Column6.HeaderText = "Customer Name";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
             // 
             // Column3
             // 
@@ -202,13 +200,6 @@ namespace software_2_c969
             this.Column1.HeaderText = "Type";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "ScheduledFor";
-            this.Column6.HeaderText = "Customer Name";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
             // 
             // FormCalendar
             // 
@@ -240,11 +231,10 @@ namespace software_2_c969
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.DataGridView dgvAppointments;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
