@@ -77,8 +77,9 @@ namespace software_2_c969
                 }      
             }
 
+            dgvAppointments.AutoGenerateColumns = false;
             dgvAppointments.DataSource = customerAppointments;
-            //RefreshData();
+            dgvAppointments.Refresh();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

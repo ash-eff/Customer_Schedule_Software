@@ -76,8 +76,8 @@ namespace software_2_c969
 
         private void CheckForUpcomingAppointments()
         {
-            //DateTime testTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 48, 0);
             DateTime currentTime = DateTime.Now;
+            Console.WriteLine("The current Time is :" + currentTime);
             string connectingString = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
             string appointmentQuery = "SELECT start FROM appointment WHERE userId = @userId";
 

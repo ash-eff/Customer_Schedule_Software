@@ -205,7 +205,7 @@ namespace software_2_c969
             // 
             // Column6
             // 
-            this.Column6.DataPropertyName = "Name";
+            this.Column6.DataPropertyName = "ScheduledFor";
             this.Column6.HeaderText = "Customer Name";
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
